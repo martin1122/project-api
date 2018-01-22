@@ -9,24 +9,20 @@ use DateTime;
 
 class Reading extends Model
 {
-    public function retrieve()
+    public function retrieve($period = null, $paginate = null)
     {
-    	$client = new InfluxDb;
+        $results = InfluxDb::getQueryBuilder()
+            ->select('*')
+            ->from('readings');
+        
+        if (!empty($period)) {
+            $results = $results->where(["time >= now() - 1{$period}"]);
+        }
 
-		$data = $client::query('SELECT * from "readings" ORDER BY time DESC');
+        $results = $results->orderBy('time', 'DESC')
+            ->getResultSet()
+            ->getPoints();
 
-		return $data->getPoints();
-	
-    }
-
-    public function retrieveOneMonth()
-    {	
-
-    	$client = new InfluxDb;
-
-		$data = $client::query('SELECT * FROM "readings" WHERE time >= now() - 4w ORDER BY time DESC');
-
-		return $data->getPoints();
-	
+    	return $results;
     }
 }

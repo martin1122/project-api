@@ -14,77 +14,77 @@ class ReadingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieveOneMonth(), new ReadingTransformer())->withResourceName('reading')->toArray();
+        $resource = fractal($reading->retrieve(), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
 
         return response()->json($resource);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function daily()
     {
-        //
+        $reading = new Reading;
+
+        $resource = fractal($reading->retrieve('d', 0), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the resource.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function weekly()
     {
-        //
+        $reading = new Reading;
+
+        $resource = fractal($reading->retrieve('w', 0), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
     }
 
     /**
-     * Display the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function monthly()
     {
-        
+        $reading = new Reading;
+
+        $resource = fractal($reading->retrieve('m', 0), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Display a listing of the resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function yearly()
     {
-        //
-    }
+        $reading = new Reading;
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $resource = fractal($reading->retrieve('y', 0), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json($resource);
     }
 }
