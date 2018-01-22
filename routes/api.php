@@ -13,6 +13,13 @@ use Illuminate\Http\Request;
 |
 */
 
+
+Route::get('/reading', 'ReadingController@index');
+Route::get('/reading/daily/', 'ReadingController@daily');
+Route::get('/reading/weekly/', 'ReadingController@weekly');
+Route::get('/reading/monthly', 'ReadingController@montly');
+Route::get('/reading/yearly', 'ReadingController@yearly');
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
