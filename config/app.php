@@ -167,6 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
+        AustinHeap\Database\InfluxDb\InfluxDbServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -208,6 +209,7 @@ return [
         'File' => Illuminate\Support\Facades\File::class,
         'Gate' => Illuminate\Support\Facades\Gate::class,
         'Hash' => Illuminate\Support\Facades\Hash::class,
+        'InfluxDb' => AustinHeap\Database\InfluxDb\InfluxDbFacade::class,
         'Lang' => Illuminate\Support\Facades\Lang::class,
         'Log' => Illuminate\Support\Facades\Log::class,
         'Mail' => Illuminate\Support\Facades\Mail::class,
