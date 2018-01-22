@@ -4,7 +4,12 @@
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
                     <div class="panel-heading">Great Stour river readings</div>
-
+                    
+                    <ul v-if="errors && errors.length">
+                        <li v-for="error of errors">
+                          {{error.message}}
+                        </li>
+                    </ul>
                     <div class="panel-body">
                        <area-chart :data="chartData"></area-chart>
                     </div>
@@ -15,11 +20,28 @@
 </template>
 
 <script>
+    import VueAxios from 'vue-axios';
+    import axios from 'axios';
+
     export default {
         data() {
             return {
-                chartData: [["Jan", 5000], ["Feb", 4900], ["Mar", 4500], ["Apr", 4700], ["May", 4900]]
+                chartData: [],
+                errors: []
             }
+        },
+
+        created() {
+            axios.get(`api/reading/monthly`)
+            .then(response => {
+                console.log(response.data);
+                for (var d in response.data) {
+                    response.data[d].map(d => this.chartData.push([d.attributes.time, d.attributes.reading]));
+                }
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
         }
     }
 </script>
