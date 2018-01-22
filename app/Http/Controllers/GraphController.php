@@ -44,5 +44,7 @@ class GraphController extends Controller
 		    'title' => 'Readings'
 		], 'readings-div');
 
+		return view('graphs');
+
     }
 }

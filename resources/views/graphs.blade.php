@@ -25,11 +25,11 @@
                 height: 100vh;
             }
 
-            .flex-center {
+            /*.flex-center {
                 align-items: center;
                 display: flex;
                 justify-content: center;
-            }
+            }*/
 
             .position-ref {
                 position: relative;
@@ -41,9 +41,9 @@
                 top: 18px;
             }
 
-            .content {
+            ./*content {
                 text-align: center;
-            }
+            }*/
 
             .title {
                 font-size: 84px;
