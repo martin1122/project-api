@@ -17,7 +17,7 @@ class ReadingController extends Controller
     {   
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieve(), new ReadingTransformer())->withResourceName('reading')->toArray();
+        $resource = fractal($reading->retrieveOneMonth(), new ReadingTransformer())->withResourceName('reading')->toArray();
 
         return response()->json($resource);
     }
