@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Reading;
+use App\Models\Reading;
 use App\Transformers\ReadingTransformer;
 
 class ReadingController extends Controller
