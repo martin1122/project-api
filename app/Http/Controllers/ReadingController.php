@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reading;
+use App\Transformers\ReadingTransformer;
 
 class ReadingController extends Controller
 {
@@ -16,7 +17,9 @@ class ReadingController extends Controller
     {   
         $reading = new Reading;
 
-        $reading->retrieve();
+        $resource = fractal($reading->retrieve(), new ReadingTransformer())->toArray();
+
+        return response()->json($resource);
     }
 
     /**
