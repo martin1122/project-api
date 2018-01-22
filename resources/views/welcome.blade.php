@@ -9,7 +9,7 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
+        
         <!-- Styles -->
         <style>
             html, body {
@@ -43,20 +43,11 @@
 
             .content {
                 text-align: center;
+                width: 60%;
             }
 
             .title {
                 font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
             }
 
             .m-b-md {
@@ -65,7 +56,7 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
+        {{-- <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
@@ -76,20 +67,25 @@
                     @endauth
                 </div>
             @endif
-
+            
+            
+           
             <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
+            </div>
+        </div> --}}
+        
+        <!-- Vue.js component -->
+        <div class="flex-center position-ref full-height">
+            <div class="content">
+                <div id="app"></div>
             </div>
         </div>
+        <script>
+            window.Laravel = <?php echo json_encode([
+               'csrfToken' => csrf_token(),
+                    ]); ?>
+        </script>
+        <script src="{{asset('js/app.js')}}"></script>
     </body>
 </html>
