@@ -15,10 +15,16 @@ use Illuminate\Http\Request;
 
 
 Route::get('/reading', 'ReadingController@index');
-Route::get('/reading/daily/', 'ReadingController@daily');
-Route::get('/reading/weekly/', 'ReadingController@weekly');
-Route::get('/reading/monthly', 'ReadingController@montly');
+Route::get('/reading/hourly', 'ReadingController@hourly');
+Route::get('/reading/hourly/{offset}', 'ReadingController@hourly');
+Route::get('/reading/daily', 'ReadingController@daily');
+Route::get('/reading/daily/{offset}', 'ReadingController@daily');
+Route::get('/reading/weekly', 'ReadingController@weekly');
+Route::get('/reading/weekly/{offset}', 'ReadingController@weekly');
+Route::get('/reading/monthly', 'ReadingController@monthly');
+Route::get('/reading/monthly/{offset}', 'ReadingController@monthly');
 Route::get('/reading/yearly', 'ReadingController@yearly');
+Route::get('/reading/yearly/{offset}', 'ReadingController@yearly');
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();

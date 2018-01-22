@@ -29,11 +29,11 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function daily()
+    public function daily($offset = 0)
     {
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieve('d', 0), new ReadingTransformer())
+        $resource = fractal($reading->retrieve('d', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -45,11 +45,28 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function weekly()
+    public function hourly($offset = 0)
     {
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieve('w', 0), new ReadingTransformer())
+        $resource = fractal($reading->retrieve('h', $offset), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function weekly($offset = 0)
+    {
+        $reading = new Reading;
+
+        $resource = fractal($reading->retrieve('w', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -61,11 +78,11 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function monthly()
+    public function monthly($offset = 0)
     {
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieve('m', 0), new ReadingTransformer())
+        $resource = fractal($reading->retrieve('m', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -77,11 +94,11 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function yearly()
+    public function yearly($offset = 0)
     {
         $reading = new Reading;
 
-        $resource = fractal($reading->retrieve('y', 0), new ReadingTransformer())
+        $resource = fractal($reading->retrieve('y', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
