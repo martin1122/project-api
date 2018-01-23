@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Device;
 
 use Illuminate\Http\Request;
+use App\Models\Device;
 use App\Models\Reading;
 use App\Transformers\ReadingTransformer;
 
@@ -13,23 +14,9 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($device)
     {
-        $resource = fractal(Reading::retrieve(), new ReadingTransformer())
-            ->withResourceName('reading')
-            ->toArray();
-
-        return response()->json($resource);
-    }
-    
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function hourly($offset = 0)
-    {
-        $resource = fractal(Reading::retrieve('h', $offset), new ReadingTransformer())
+        $resource = fractal($device->readings(), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -41,9 +28,9 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function daily($offset = 0)
+    public function hourly($device, $offset = 0)
     {
-        $resource = fractal(Reading::retrieve('d', $offset), new ReadingTransformer())
+        $resource = fractal($device->readings('h', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -55,9 +42,9 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function weekly($offset = 0)
+    public function daily($device, $offset = 0)
     {
-        $resource = fractal(Reading::retrieve('w', $offset), new ReadingTransformer())
+        $resource = fractal($device->readings('d', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -69,9 +56,9 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function monthly($offset = 0)
+    public function weekly($device, $offset = 0)
     {
-        $resource = fractal(Reading::retrieve('m', $offset), new ReadingTransformer())
+        $resource = fractal($device->readings('w', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -83,9 +70,23 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function yearly($offset = 0)
+    public function monthly($device, $offset = 0)
     {
-        $resource = fractal(Reading::retrieve('y', $offset), new ReadingTransformer())
+        $resource = fractal($device->readings('m', $offset), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function yearly($device, $offset = 0)
+    {
+        $resource = fractal($device->readings('y', $offset), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 

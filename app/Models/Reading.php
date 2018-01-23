@@ -9,7 +9,7 @@ use DateTime;
 
 class Reading extends Model
 {
-    public function retrieve($period = null, $paginate = 0)
+    public static function retrieve($period = null, $offset = 0, $deviceId = null)
     {
         switch ($period) {
             case 'm':
@@ -30,12 +30,16 @@ class Reading extends Model
             ->from('readings');
         
         if (!empty($period)) {
-            $startNum = $number * $paginate;
-            $endNum = $number * ($paginate+1);
-            if ($paginate > 0) {
+            $startNum = $number * $offset;
+            $endNum = $number * ($offset+1);
+            if ($offset > 0) {
                 $results = $results->where(["time <= now() - {$startNum}{$period}"]);
             }
             $results = $results->where(["time >= now() - {$endNum}{$period}"]);
+        }
+
+        if (!empty($deviceId)) {
+            $results = $results->where(["device == {$deviceId}"]);
         }
 
         $results = $results->orderBy('time', 'DESC')

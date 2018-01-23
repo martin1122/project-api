@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Device;
+use App\Models\Area;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -26,6 +28,15 @@ class RouteServiceProvider extends ServiceProvider
         //
 
         parent::boot();
+
+
+        Route::bind('device', function ($value) {
+            return Device::where('id', $value)->firstOrFail();
+        });
+
+        Route::bind('area', function ($value) {
+            return Area::where('id', $value)->firstOrFail();
+        });
     }
 
     /**

@@ -1,0 +1,24 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\Device;
+use App\Transformers\DeviceTransformer;
+
+class DeviceController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $resource = fractal(Device::all(), new DeviceTransformer())
+            ->withResourceName('device')
+            ->toArray();
+
+        return response()->json($resource);
+    }
+}
