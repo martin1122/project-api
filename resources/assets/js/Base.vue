@@ -1,43 +1,53 @@
 <template>
     <div class="container">
         <div>
-            <transition name="fade"></transition>
-            <component :is="currentlyActiveComponent"></component>
+            <transition name="fade" mode="out-in">
+                <component :is="currentlyActiveComponent"></component>
+            </transition>
             <div id="buttons">
-                <button @click="switchToReport">Yearly</button>
-                <button @click="switchToProject">Monthly</button>
+                <button type="button" class="btn btn-primary" @click="switchToHourly">Hourly</button>
+                <button type="button" class="btn btn-primary" @click="switchToDaily">Daily</button>
+                <button type="button" class="btn btn-primary" @click="switchToMonthly">Monthly</button>
+                <button type="button" class="btn btn-primary" @click="switchToYearly">Yearly</button>
             </div>
         </div>
     </div>
 </template>
 <style>
     .fade-enter-active, .fade-leave-active {
-      transition: opacity .5s
+      transition: opacity .3s ease
     }
-    .fade-enter, .fade-leave-active {
+    .fade-enter, .fade-leave-to {
       opacity: 0
     }
 </style>
 <script>
-
+    import HourlyReadings from './components/HourlyReadings.vue';
+    import DailyReadings from './components/DailyReadings.vue';
     import MonthlyReadings from './components/MonthlyReadings.vue';
     import YearlyReadings from './components/YearlyReadings.vue';
     import Buttons from './components/Buttons.vue';
 
     export default {
         name: 'Base',
-        components: { MonthlyReadings, YearlyReadings },
+        components: { HourlyReadings, DailyReadings, MonthlyReadings, YearlyReadings },
         data() {
             return {
-                currentlyActiveComponent: MonthlyReadings
+                currentlyActiveComponent: DailyReadings
             }
         },
         methods: {
-            switchToReport:function(){
+            switchToYearly:function(){
                 this.currentlyActiveComponent = YearlyReadings
             },
-            switchToProject:function(){
+            switchToMonthly:function(){
                 this.currentlyActiveComponent = MonthlyReadings
+            },
+            switchToDaily:function(){
+                this.currentlyActiveComponent = DailyReadings
+            },
+            switchToHourly:function(){
+                this.currentlyActiveComponent = HourlyReadings
             }
         },
         mounted() {

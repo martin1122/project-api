@@ -23,8 +23,7 @@
         data() {
             return {
                 chartData: [],
-                errors: [],
-                test: "Yearly readings"
+                errors: []
             }
         },
         methods: {

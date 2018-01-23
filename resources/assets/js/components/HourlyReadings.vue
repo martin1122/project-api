@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Monthly readings</div>
+                    <div class="panel-heading">Hourly readings</div>
                     <ul v-if="errors && errors.length">
                         <li v-for="error of errors">
                           {{error.message}}
@@ -11,8 +11,6 @@
                     </ul>
                     <div class="panel-body">
                        <area-chart :data="chartData"></area-chart>
-                       <!-- <YearlyReadings></YearlyReadings> -->
-                       <!-- <p>{{test}}</p> -->
                     </div>
                 </div>
             </div>
@@ -22,16 +20,16 @@
 
 <script>
     export default {
-        name: 'MonthlyReadings',
+        name: 'HourlyReadings',
         data() {
             return {
                 chartData: [],
-                errors: []
+                errors: [],
             }
         },
         methods: {
             fetchData() {
-                this.axios.get(`api/reading/monthly`)
+                this.axios.get(`api/reading/hourly`)
                 .then(response => {
                     console.log(response);
                     for (var d in response.data) {
@@ -47,7 +45,7 @@
             this.fetchData();
         },
         mounted() {
-            console.log('MonthlyReadings Component mounted.')
+            console.log('HourlyReadings Component mounted.')
         }
     }
 </script>

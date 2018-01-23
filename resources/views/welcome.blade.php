@@ -11,8 +11,8 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        
         <!-- Styles -->
+        <link rel="stylesheet" href="{{asset('css/app.css')}}">
         <style>
             html, body {
                 background-color: #fff;
@@ -45,7 +45,6 @@
 
             .content {
                 text-align: center;
-                width: 60%;
             }
 
             .title {
@@ -58,7 +57,6 @@
         </style>
     </head>
     <body>
-    
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -84,6 +82,5 @@
                'csrfToken' => csrf_token(),
                     ]); ?>
         </script>
-        
     </body>
 </html>

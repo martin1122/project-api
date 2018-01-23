@@ -78229,7 +78229,7 @@ exports = module.exports = __webpack_require__(219)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  -webkit-transition: opacity .5s;\n  transition: opacity .5s\n}\n.fade-enter, .fade-leave-active {\n  opacity: 0\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  -webkit-transition: opacity .3s ease;\n  transition: opacity .3s ease\n}\n.fade-enter, .fade-leave-to {\n  opacity: 0\n}\n", ""]);
 
 // exports
 
@@ -78240,12 +78240,16 @@ exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  -webkit-t
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue__ = __webpack_require__(240);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_YearlyReadings_vue__ = __webpack_require__(243);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_YearlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_YearlyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Buttons_vue__ = __webpack_require__(246);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_Buttons_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_Buttons_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue__ = __webpack_require__(254);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue__ = __webpack_require__(251);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue__ = __webpack_require__(240);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue__ = __webpack_require__(243);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue__);
 //
 //
 //
@@ -78266,6 +78270,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+
 
 
 
@@ -78274,19 +78282,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Base',
-    components: { MonthlyReadings: __WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue___default.a, YearlyReadings: __WEBPACK_IMPORTED_MODULE_1__components_YearlyReadings_vue___default.a },
+    components: { HourlyReadings: __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default.a, DailyReadings: __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default.a, MonthlyReadings: __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default.a, YearlyReadings: __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default.a },
     data: function data() {
         return {
-            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue___default.a
+            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default.a
         };
     },
 
     methods: {
-        switchToReport: function switchToReport() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_1__components_YearlyReadings_vue___default.a;
+        switchToYearly: function switchToYearly() {
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default.a;
         },
-        switchToProject: function switchToProject() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_0__components_MonthlyReadings_vue___default.a;
+        switchToMonthly: function switchToMonthly() {
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default.a;
+        },
+        switchToDaily: function switchToDaily() {
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default.a;
+        },
+        switchToHourly: function switchToHourly() {
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default.a;
         }
     },
     mounted: function mounted() {
@@ -78306,18 +78320,53 @@ var render = function() {
     _c(
       "div",
       [
-        _c("transition", { attrs: { name: "fade" } }),
-        _vm._v(" "),
-        _c(_vm.currentlyActiveComponent, { tag: "component" }),
+        _c(
+          "transition",
+          { attrs: { name: "fade", mode: "out-in" } },
+          [_c(_vm.currentlyActiveComponent, { tag: "component" })],
+          1
+        ),
         _vm._v(" "),
         _c("div", { attrs: { id: "buttons" } }, [
-          _c("button", { on: { click: _vm.switchToReport } }, [
-            _vm._v("Yearly")
-          ]),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.switchToHourly }
+            },
+            [_vm._v("Hourly")]
+          ),
           _vm._v(" "),
-          _c("button", { on: { click: _vm.switchToProject } }, [
-            _vm._v("Monthly")
-          ])
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.switchToDaily }
+            },
+            [_vm._v("Daily")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.switchToMonthly }
+            },
+            [_vm._v("Monthly")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary",
+              attrs: { type: "button" },
+              on: { click: _vm.switchToYearly }
+            },
+            [_vm._v("Yearly")]
+          )
         ])
       ],
       1
@@ -78415,8 +78464,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             chartData: [],
-            errors: [],
-            test: "monthly readings"
+            errors: []
         };
     },
 
@@ -78574,8 +78622,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             chartData: [],
-            errors: [],
-            test: "Yearly readings"
+            errors: []
         };
     },
 
@@ -78583,7 +78630,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         fetchData: function fetchData() {
             var _this = this;
 
-            this.axios.get("api/reading/yearly").then(function (response) {
+            this.axios.get('api/reading/yearly').then(function (response) {
                 console.log(response);
                 for (var d in response.data) {
                     response.data[d].map(function (d) {
@@ -78809,6 +78856,324 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-4d1999cc", module.exports)
+  }
+}
+
+/***/ }),
+/* 251 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(232)
+/* script */
+var __vue_script__ = __webpack_require__(252)
+/* template */
+var __vue_template__ = __webpack_require__(253)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DailyReadings.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-51ae03f9", Component.options)
+  } else {
+    hotAPI.reload("data-v-51ae03f9", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 252 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'DailyReadings',
+    data: function data() {
+        return {
+            chartData: [],
+            errors: []
+        };
+    },
+
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            this.axios.get('api/reading/daily/0').then(function (response) {
+                console.log(response);
+                for (var d in response.data) {
+                    response.data[d].map(function (d) {
+                        return _this.chartData.push([d.attributes.time, d.attributes.reading]);
+                    });
+                }
+            }).catch(function (e) {
+                _this.errors.push(e);
+            });
+        }
+    },
+    created: function created() {
+        this.fetchData();
+    },
+    mounted: function mounted() {
+        console.log('DailyReadings Component mounted.');
+    }
+});
+
+/***/ }),
+/* 253 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("Daily readings")
+          ]),
+          _vm._v(" "),
+          _vm.errors && _vm.errors.length
+            ? _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n                      " +
+                        _vm._s(error.message) +
+                        "\n                    "
+                    )
+                  ])
+                })
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [_c("area-chart", { attrs: { data: _vm.chartData } })],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-51ae03f9", module.exports)
+  }
+}
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(232)
+/* script */
+var __vue_script__ = __webpack_require__(255)
+/* template */
+var __vue_template__ = __webpack_require__(256)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/HourlyReadings.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-449a0aef", Component.options)
+  } else {
+    hotAPI.reload("data-v-449a0aef", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 255 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'HourlyReadings',
+    data: function data() {
+        return {
+            chartData: [],
+            errors: []
+        };
+    },
+
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            this.axios.get('api/reading/hourly').then(function (response) {
+                console.log(response);
+                for (var d in response.data) {
+                    response.data[d].map(function (d) {
+                        return _this.chartData.push([d.attributes.time, d.attributes.reading]);
+                    });
+                }
+            }).catch(function (e) {
+                _this.errors.push(e);
+            });
+        }
+    },
+    created: function created() {
+        this.fetchData();
+    },
+    mounted: function mounted() {
+        console.log('HourlyReadings Component mounted.');
+    }
+});
+
+/***/ }),
+/* 256 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("Hourly readings")
+          ]),
+          _vm._v(" "),
+          _vm.errors && _vm.errors.length
+            ? _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n                      " +
+                        _vm._s(error.message) +
+                        "\n                    "
+                    )
+                  ])
+                })
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "panel-body" },
+            [_c("area-chart", { attrs: { data: _vm.chartData } })],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-449a0aef", module.exports)
   }
 }
 
