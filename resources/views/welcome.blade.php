@@ -4,7 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        
+        <!-- CSRF Token -->
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>Laravel</title>
 
         <!-- Fonts -->
@@ -47,7 +49,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 44px;
             }
 
             .m-b-md {
@@ -56,36 +58,32 @@
         </style>
     </head>
     <body>
-        {{-- <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
+    
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="panel panel-default">
+                        <div class="panel-heading title flex-center">Great Stour river readings</div>
+                    </div>
                 </div>
-            @endif
-            
-            
-           
-            <div class="content">
-
             </div>
-        </div> --}}
-        
+        </div>
         <!-- Vue.js component -->
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <div id="app"></div>
+                <div id="app">
+                    <component v-bind:is="currentView">
+                      <!-- component changes when vm.currentView changes! -->
+                    </component>
+                </div>
             </div>
         </div>
+        <script src="{{asset('js/app.js')}}"></script>
         <script>
             window.Laravel = <?php echo json_encode([
                'csrfToken' => csrf_token(),
                     ]); ?>
         </script>
-        <script src="{{asset('js/app.js')}}"></script>
+        
     </body>
 </html>
