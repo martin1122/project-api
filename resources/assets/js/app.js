@@ -10,12 +10,7 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 
-// import App from './App.vue';
-
-// Vue.component('MonthlyReadings', require('./components/MonthlyReadings.vue'));
-// Vue.component('YearlyReadings', require('./components/YearlyReadings.vue'));
-import MonthlyReadings from './components/MonthlyReadings'; 
-import YearlyReadings from './components/YearlyReadings'; 
+import Base from './Base'; 
 
 
 // Vue.use(VueRouter);
@@ -37,15 +32,8 @@ Vue.use(VueChartkick, { Chartkick })
 
 window.app = new Vue({
   el: '#app',
-  template: '<MonthlyReadings/>',
-  data: {
-    currentView: 'MonthlyReadings'
-  },
-  components: { MonthlyReadings }
-  // components: { 
-  //   MonthlyReadings: { MonthlyReadings }, 
-  //   // YearlyReadings: { YearlyReadings }
-  // }
+  template: '<Base/>',
+  components: { Base }
 });
 
 

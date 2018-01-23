@@ -10,8 +10,7 @@
                         </li>
                     </ul>
                     <div class="panel-body">
-                       <!-- <area-chart :data="chartData"></area-chart> -->
-                       <p>{{ test }}</p>
+                       <area-chart :data="chartData"></area-chart>
                     </div>
                 </div>
             </div>
@@ -32,7 +31,7 @@
             fetchData() {
                 this.axios.get(`api/reading/yearly`)
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response);
                     for (var d in response.data) {
                         response.data[d].map(d => this.chartData.push([d.attributes.time, d.attributes.reading]));
                     }
@@ -42,11 +41,11 @@
                 })
             }
         },
-        // created() {
-        //     this.fetchData();
-        // },
+        created() {
+            this.fetchData();
+        },
         mounted() {
-            console.log('Component mounted.')
+            console.log('YearlyReadings Component mounted.')
         }
     }
 </script>

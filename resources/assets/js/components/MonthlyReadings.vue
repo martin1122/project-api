@@ -34,7 +34,7 @@
             fetchData() {
                 this.axios.get(`api/reading/monthly`)
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response);
                     for (var d in response.data) {
                         response.data[d].map(d => this.chartData.push([d.attributes.time, d.attributes.reading]));
                     }
@@ -48,7 +48,7 @@
             this.fetchData();
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('MonthlyReadings Component mounted.')
         }
     }
 </script>
