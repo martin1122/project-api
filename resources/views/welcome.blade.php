@@ -61,7 +61,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading title flex-center">Great Stour river readings</div>
+                        <div class="panel-heading title flex-center">River Stour readings</div>
                     </div>
                 </div>
             </div>

@@ -33,20 +33,20 @@
         components: { HourlyReadings, DailyReadings, MonthlyReadings, YearlyReadings },
         data() {
             return {
-                currentlyActiveComponent: DailyReadings
+                currentlyActiveComponent: MonthlyReadings
             }
         },
         methods: {
-            switchToYearly:function(){
+            switchToYearly:function() {
                 this.currentlyActiveComponent = YearlyReadings
             },
-            switchToMonthly:function(){
+            switchToMonthly:function() {
                 this.currentlyActiveComponent = MonthlyReadings
             },
-            switchToDaily:function(){
+            switchToDaily:function() {
                 this.currentlyActiveComponent = DailyReadings
             },
-            switchToHourly:function(){
+            switchToHourly:function() {
                 this.currentlyActiveComponent = HourlyReadings
             }
         },

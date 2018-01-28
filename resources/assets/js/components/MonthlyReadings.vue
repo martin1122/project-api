@@ -10,6 +10,7 @@
                         </li>
                     </ul>
                     <div class="panel-body">
+                        {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from last month
                        <area-chart :data="chartData"></area-chart>
                        <!-- <YearlyReadings></YearlyReadings> -->
                        <!-- <p>{{test}}</p> -->
@@ -26,7 +27,9 @@
         data() {
             return {
                 chartData: [],
-                errors: []
+                errors: [],
+                increaseDecrease: 0,
+                increaseDecreaseMessage: ''
             }
         },
         methods: {
@@ -37,10 +40,29 @@
                     for (var d in response.data) {
                         response.data[d].map(d => this.chartData.push([d.attributes.time, d.attributes.reading]));
                     }
+
+                    this.calculateIncreaseDecreaseRange();
                 })
                 .catch(e => {
                   this.errors.push(e)
                 })
+            },
+            calculateIncreaseDecreaseRange(chartData) {
+                // Latest value in array (first one)
+                var latestReading = this.chartData[0][1];
+                // Oldest value in array (last one)
+                var oldestReading = this.chartData[this.chartData.length-1][1];
+
+                // Calculate difference between first reading and last 
+                this.increaseDecrease = Math.abs(oldestReading - latestReading);
+       
+                // Determine whether it has increased or decreased
+                console.log(this.chartData);
+                if(latestReading > oldestReading) {
+                    this.increaseDecreaseMessage = 'Up'
+                } else {
+                    this.increaseDecreaseMessage = 'Down'
+                }
             }
         }, 
         created() {
