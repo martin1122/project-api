@@ -1,4 +1,7 @@
-import Vue from 'vue';
+require('./bootstrap.js')
+
+window.Vue = require('vue');
+
 import VueRouter from 'vue-router';
 import Chartkick from 'chartkick'
 import VueChartkick from 'vue-chartkick'
@@ -7,20 +10,35 @@ import VueAxios from 'vue-axios';
 import axios from 'axios';
 
 
-import App from './App.vue';
-import SensorReadings from './components/SensorReadings.vue';
+import Base from './Base'; 
 
-Vue.use(VueRouter);
+
+// Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(VueChartkick, { Chartkick })
 
-const routes = [
-  {
-      name: 'SensorReadings',
-      path: '/',
-      component: SensorReadings
-  }
-];
-const router = new VueRouter({ mode: 'history', routes: routes});
-new Vue(Vue.util.extend({ router }, App)).$mount('#app');
+// const routes = [
+//   {
+//       name: 'MonthlyReadings',
+//       path: '/',
+//       component: MonthlyReadings
+//   },
+//   // {
+//   //     name: 'YearlyReadings',
+//   //     path: '/',
+//   //     component: YearlyReadings
+//   // }
+// ];
+
+window.app = new Vue({
+  el: '#app',
+  template: '<Base/>',
+  components: { Base }
+});
+
+
+
+
+// const router = new VueRouter({ mode: 'history', routes: routes});
+// new Vue(Vue.util.extend({ router }, App)).$mount('#app');
 
