@@ -13,7 +13,7 @@ class AreaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $resource = fractal(Area::all(), new AreaTransformer())
             ->withResourceName('area')

@@ -11,7 +11,7 @@ class GraphController extends Controller
 	 * [index description]
 	 * @return [type] [description]
 	 */
-    public function index()
+    public function index(Request $request)
     {
 
 		$readings = Lava::DataTable();

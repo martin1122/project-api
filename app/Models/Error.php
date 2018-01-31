@@ -7,12 +7,11 @@ use InfluxDb;
 use League\Fractal;
 use DateTime;
 
-class Reading extends Model
+class Error extends Model
 {
-
     public $incrementing = false;
 
-    public static function retrieve($period = null, $filters = [], $deviceId = null)
+    public static function retrieve($period = null, $offset = 0, $deviceId = null)
     {
         switch ($period) {
             case 'm':
@@ -30,15 +29,15 @@ class Reading extends Model
 
         $results = InfluxDb::getQueryBuilder()
             ->select('*')
-            ->from('readings');
+            ->from('errors');
         
         if (!empty($period)) {
-            $results = $results->select('mean(reading) as reading, first(device) as device, mean(power) as power, time')  
-                ->groupBy("time({$number}{$period}), device");
-        } 
-
-        if (!empty($filters)) {
-            $results = $results->where($filters);
+            $startNum = $number * $offset;
+            $endNum = $number * ($offset+1);
+            if ($offset > 0) {
+                $results = $results->where(["time <= now() - {$startNum}{$period}"]);
+            }
+            $results = $results->where(["time >= now() - {$endNum}{$period}"]);
         }
 
         if (!empty($deviceId)) {

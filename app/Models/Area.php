@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Device;
+use App\Models\Error;
 use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
@@ -14,8 +15,11 @@ class Area extends Model
      * @var array
      */
     protected $fillable = [
-        'name'
+        'name',
+        'parent_id'
     ];
+
+    public $incrementing = false;
 
     public function parent()
     {
@@ -32,8 +36,13 @@ class Area extends Model
         return $this->hasMany(Device::class);
     }
 
-    // public function readings($period, $offset)
-    // {
-    //     return Reading::retrieve($period, $offset, $this->id);
-    // }
+    public function readings($period = null, $filters = [])
+    {
+        return Reading::retrieve($period, $filters, $this->devices()->pluck('id'));
+    }
+
+    public function errors($period = null, $filters = [])
+    {
+        return Error::retrieve($period, $filters, $this->devices()->pluck('id'));
+    }
 }

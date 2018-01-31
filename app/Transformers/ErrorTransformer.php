@@ -5,7 +5,7 @@ namespace App\Transformers;
 use League\Fractal;
 use App\Models\Device;
 
-class ReadingTransformer extends Fractal\TransformerAbstract
+class ErrorTransformer extends Fractal\TransformerAbstract
 {	
 
 	/**
@@ -15,9 +15,9 @@ class ReadingTransformer extends Fractal\TransformerAbstract
      */
     protected $availableIncludes = [
 		'device'
-	];
-	
-	/**
+    ];
+
+    /**
      * Transform object into an json api array to display
      *
      * @return array
@@ -31,13 +31,12 @@ class ReadingTransformer extends Fractal\TransformerAbstract
 	    	'id'           => $id,
 	        'device_id'    => $data['device'],
 	        'display_type' => $data['display_type'],
-	        'reading'      => $data['reading'],
 	        'power'        => $data['power'],
 	        'time'         => $data['time']
 	    ];
-	}
-
-	/**
+    }
+    
+    /**
      * Include Device
      *
      * @return League\Fractal\ItemResource

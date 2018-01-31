@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Reading;
+use App\Models\Error;
 use App\Models\Area;
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,16 +16,23 @@ class Device extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'area_id', 'lat', 'long'
+        'name', 'latitude', 'longitude', 'area_id'
     ];
+
+    public $incrementing = false;
 
     public function area()
     {
         return $this->belongsTo(Area::class);
     }
 
-    public function readings($period, $offset)
+    public function readings($period = null, $filters = [])
     {
-        return Reading::retrieve($period, $offset, $this->id);
+        return Reading::retrieve($period, $filters, $this->id);
+    }
+
+    public function errors($period = null, $filters = [])
+    {
+        return Error::retrieve($period, $filters, $this->id);
     }
 }
