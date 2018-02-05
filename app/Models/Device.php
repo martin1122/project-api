@@ -26,13 +26,13 @@ class Device extends Model
         return $this->belongsTo(Area::class);
     }
 
-    public function readings($period = null, $filters = [])
+    public function readings($period = null, $paginate = 0, $filters = [])
     {
-        return Reading::retrieve($period, $filters, $this->id);
+        return Reading::retrieve($period, $paginate, $filters, $this->id);
     }
 
-    public function errors($period = null, $filters = [])
+    public function errors($period = null, $paginate= 0, $filters = [])
     {
-        return Error::retrieve($period, $filters, $this->id);
+        return Error::retrieve($period, $paginate, $filters, $this->id);
     }
 }

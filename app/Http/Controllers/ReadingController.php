@@ -16,9 +16,10 @@ class ReadingController extends Controller
     public function index(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve(null, $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve(null, $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -33,9 +34,10 @@ class ReadingController extends Controller
     public function hourly(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve('h', $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve('h', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -50,9 +52,10 @@ class ReadingController extends Controller
     public function daily(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve('d', $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve('d', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -67,9 +70,10 @@ class ReadingController extends Controller
     public function weekly(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve('w', $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve('w', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -84,9 +88,10 @@ class ReadingController extends Controller
     public function monthly(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve('m', $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve('m', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -101,9 +106,10 @@ class ReadingController extends Controller
     public function yearly(Request $request)
     {
         $filter = $request->query('filter', '');
-        $filter = !empty($filter) ? $request->explode(',', $filter) : [];
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        $resource = fractal(Reading::retrieve('y', $filter), new ReadingTransformer())
+        $resource = fractal(Reading::retrieve('y', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 

@@ -2,21 +2,44 @@
 
 namespace App\Http\Controllers\Area;
 
-use Illuminate\Http\Request;
-use App\Models\Device;
+use App\Models\Area;
 use App\Models\Reading;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Transformers\ReadingTransformer;
 
 class ReadingController extends Controller
 {
+   /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request, Area $area)
+    {
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
+
+        $resource = fractal($area->readings(null, $page, $filter), new ReadingTransformer())
+            ->withResourceName('reading')
+            ->toArray();
+
+        return response()->json($resource);
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($area)
+    public function hourly(Request $request, Area $area)
     {
-        $resource = fractal($area->readings(), new ReadingTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
+
+        $resource = fractal($area->readings('h', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -28,9 +51,13 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function hourly($area, $offset = 0)
+    public function daily(Request $request, Area $area)
     {
-        $resource = fractal($area->readings('h', $offset), new ReadingTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
+
+        $resource = fractal($area->readings('d', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -42,9 +69,13 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function daily($area, $offset = 0)
+    public function weekly(Request $request, Area $area)
     {
-        $resource = fractal($area->readings('d', $offset), new ReadingTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
+
+        $resource = fractal($area->readings('w', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -56,9 +87,13 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function weekly($area, $offset = 0)
+    public function monthly(Request $request, Area $area)
     {
-        $resource = fractal($area->readings('w', $offset), new ReadingTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
+
+        $resource = fractal($area->readings('m', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 
@@ -70,23 +105,13 @@ class ReadingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function monthly($area, $offset = 0)
+    public function yearly(Request $request, Area $area)
     {
-        $resource = fractal($area->readings('m', $offset), new ReadingTransformer())
-            ->withResourceName('reading')
-            ->toArray();
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+        $page = $request->query('page', 0);
 
-        return response()->json($resource);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function yearly($area, $offset = 0)
-    {
-        $resource = fractal($area->readings('y', $offset), new ReadingTransformer())
+        $resource = fractal($area->readings('y', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
 

@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 use InfluxDb;
 use League\Fractal;
 use DateTime;
+use App\Traits\HydrateInfluxTrait;
 
 class Reading extends Model
 {
+    use HydrateInfluxTrait;
 
     public $incrementing = false;
 
-    public static function retrieve($period = null, $filters = [], $deviceId = null)
+    public static function retrieve($period = null, $page = 0, $filters = [], $deviceId = null)
     {
         switch ($period) {
             case 'm':
@@ -33,8 +35,8 @@ class Reading extends Model
             ->from('readings');
         
         if (!empty($period)) {
-            $results = $results->select('mean(reading) as reading, first(device) as device, mean(power) as power, time')  
-                ->groupBy("time({$number}{$period}), device");
+            $results = $results->select('mean(reading) as reading, mean(power) as power')  
+                ->groupBy("time({$number}{$period}), device, type, display_type");
         } 
 
         if (!empty($filters)) {
@@ -42,16 +44,15 @@ class Reading extends Model
         }
 
         if (!empty($deviceId)) {
-            if(is_array($deviceId)) {
-                $query = "(";
+            if (is_array($deviceId)) {
+                $query = "";
 
                 for ($i = 0; $i < count($deviceId); $i++) {
-                    $query .= "device = '{$deviceId}'";
-                    if($i > 0 && $i < (count($deviceId)-1)) {
+                    $query .= "device = '{$deviceId[$i]}'";
+                    if ($i < (count($deviceId)-1)) {
                         $query .= " OR ";
                     }
                 }
-                $query .= ")";
 
                 $results = $results->where([$query]);
             } else {
@@ -59,9 +60,25 @@ class Reading extends Model
             }
         }
 
-        $results = $results->orderBy('time', 'DESC')
-            ->getResultSet()
-            ->getPoints();
+        $results = $results->orderBy('time', 'DESC');
+
+        if ($page >= 0) {
+            $results = $results->limit(500);
+        }
+        
+        $results = $results->getQuery();
+
+        if ($page > 0) {
+            $results .= sprintf(' OFFSET %s', $page * 500);
+        }
+
+        $results = InfluxDB::query($results);
+
+        if (!empty($period)) {
+            $results = self::hydrateResultSet($results);
+        } else {
+            $results = $results->getPoints();
+        }
 
     	return $results;
     }

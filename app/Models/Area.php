@@ -36,13 +36,13 @@ class Area extends Model
         return $this->hasMany(Device::class);
     }
 
-    public function readings($period = null, $filters = [])
+    public function readings($period = null, $paginate = 0, $filters = [])
     {
-        return Reading::retrieve($period, $filters, $this->devices()->pluck('id'));
+        return Reading::retrieve($period, $paginate, $filters, $this->devices()->pluck('id')->toArray());
     }
 
-    public function errors($period = null, $filters = [])
+    public function errors($period = null, $paginate = 0, $filters = [])
     {
-        return Error::retrieve($period, $filters, $this->devices()->pluck('id'));
+        return Error::retrieve($period, $paginate, $filters, $this->devices()->pluck('id')->toArray());
     }
 }

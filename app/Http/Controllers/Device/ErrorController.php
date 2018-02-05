@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Device;
 
+use App\Models\Error;
 use App\Models\Device;
-use App\Models\Reading;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Transformers\ReadingTransformer;
+use App\Transformers\ErrorTransformer;
 
-class ReadingController extends Controller
+class ErrorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,8 +21,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings(null, $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors(null, $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);
@@ -39,8 +39,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings('h', $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors('h', $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);
@@ -57,8 +57,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings('d', $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors('d', $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);
@@ -75,8 +75,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings('w', $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors('w', $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);
@@ -93,8 +93,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings('m', $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors('m', $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);
@@ -111,8 +111,8 @@ class ReadingController extends Controller
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);
 
-        $resource = fractal($device->readings('y', $page, $filter), new ReadingTransformer())
-            ->withResourceName('reading')
+        $resource = fractal($device->errors('y', $page, $filter), new ErrorTransformer())
+            ->withResourceName('error')
             ->toArray();
 
         return response()->json($resource);

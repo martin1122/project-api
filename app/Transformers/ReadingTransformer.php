@@ -24,16 +24,16 @@ class ReadingTransformer extends Fractal\TransformerAbstract
      */
 	public function transform($data)
 	{	
-
-	    $id = $data['time'] .'-'. $data['device'];
+	    $id = array_get($data, 'time') .'-'. array_get($data, 'device');
 
 	    return [
 	    	'id'           => $id,
-	        'device_id'    => $data['device'],
-	        'display_type' => $data['display_type'],
-	        'reading'      => $data['reading'],
-	        'power'        => $data['power'],
-	        'time'         => $data['time']
+	        'device_id'    => array_get($data, 'device'),
+	        'type'         => (int) array_get($data, 'type'),
+	        'display_type' => array_get($data, 'display_type'),
+	        'reading'      => array_get($data, 'reading'),
+	        'power'        => array_get($data, 'power'),
+	        'time'         => array_get($data, 'time'),
 	    ];
 	}
 
