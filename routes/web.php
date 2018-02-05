@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/', 'welcome');
+// Route::get('/', 'ReadingController@index');
+Route::get('/graphs', 'GraphController@index');
