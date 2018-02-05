@@ -8,12 +8,11 @@ use League\Fractal;
 use DateTime;
 use App\Traits\HydrateInfluxTrait;
 
-class Reading extends Model
+class Error extends Model
 {
     use HydrateInfluxTrait;
 
     public $incrementing = false;
-
     public static function retrieve($period = null, $page = 0, $filters = [], $deviceId = null)
     {
         switch ($period) {
@@ -32,10 +31,10 @@ class Reading extends Model
 
         $results = InfluxDb::getQueryBuilder()
             ->select('*')
-            ->from('readings');
+            ->from('errors');
         
         if (!empty($period)) {
-            $results = $results->select('mean(reading) as reading, mean(power) as power')  
+            $results = $results->select('mean(power) as power')  
                 ->groupBy("time({$number}{$period}), device, type, display_type");
         } 
 
