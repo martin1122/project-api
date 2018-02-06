@@ -6,16 +6,26 @@ use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Transformers\AreaTransformer;
 
+/**
+ * @resource Area
+ *
+ * Represents the concept of an area, such as a river or city which has devices. Areas can contain other areas to potentially even represent a country and its various divisions
+ */
 class AreaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all areas paginated
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed area objects utilising fractal to provide include and pagination capabilities
+     * 
+     * @transformer \App\Transformers\AreaTransformer
+     * @transformermodel \App\Models\Area
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function index(Request $request)
     {
-        $resource = fractal(Area::all(), new AreaTransformer())
+        $resource = fractal(Area::paginate(), new AreaTransformer())
             ->withResourceName('area')
             ->toArray();
 
@@ -23,9 +33,15 @@ class AreaController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays a single area's data request via its id
      *
-     * @return \Illuminate\Http\Response
+     * Returns a transformed item of the area model utilising fractal to provide include capatabilities
+     * 
+     * @transformer \App\Transformers\AreaTransformer
+     * @transformermodel \App\Models\Area
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Area $area The Area item wanted
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function show(Request $request, Area $area) 
     {
