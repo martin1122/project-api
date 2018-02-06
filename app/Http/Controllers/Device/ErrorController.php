@@ -8,12 +8,23 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\ErrorTransformer;
 
+/**
+ * @resource Device/Error
+ *
+ * This is the subresource of all errors belonging to a supplied device
+ */
 class ErrorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function index(Request $request, Device $device)
     {
@@ -29,9 +40,15 @@ class ErrorController extends Controller
     }
     
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors grouped into hourly points paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities. Each of the points are made through averaging together points occupying the grouped time interval.
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function hourly(Request $request, Device $device)
     {
@@ -47,9 +64,15 @@ class ErrorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors grouped into daily points paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities. Each of the points are made through averaging together points occupying the grouped time interval.
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function daily(Request $request, Device $device)
     {
@@ -65,9 +88,15 @@ class ErrorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors grouped into weekly points paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities. Each of the points are made through averaging together points occupying the grouped time interval.
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function weekly(Request $request, Device $device)
     {
@@ -83,9 +112,15 @@ class ErrorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors grouped into monthly points paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities. Each of the points are made through averaging together points occupying the grouped time interval.
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function monthly(Request $request, Device $device)
     {
@@ -101,9 +136,15 @@ class ErrorController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Displays a listing of all device errors grouped into yearly points paginated in divisons of 500
      *
-     * @return \Illuminate\Http\Response
+     * Displays a listing of transformed error points, belonging to the requested device, utilising fractal to provide include capabilities. Each of the points are made through averaging together points occupying the grouped time interval.
+     * 
+     * @transformer \App\Transformers\ErrorTransformer
+     * @transformermodel \App\Models\Error
+     * @param \Illuminate\Http\Request $request The Request Data
+     * @param \App\Models\Device $device The Device the errors belong to
+     * @return \Illuminate\Http\Response The transformed json response
      */
     public function yearly(Request $request, Device $device)
     {

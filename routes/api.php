@@ -75,6 +75,6 @@ Route::get('reading/weekly', ReadingController::class.'@weekly');
 Route::get('reading/monthly', ReadingController::class.'@monthly');
 Route::get('reading/yearly', ReadingController::class.'@yearly');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

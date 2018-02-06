@@ -169,6 +169,7 @@ return [
          */
         AustinHeap\Database\InfluxDb\InfluxDbServiceProvider::class,
         Khill\Lavacharts\Laravel\LavachartsServiceProvider::class,
+        Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
 
         /*
          * Application Service Providers...
