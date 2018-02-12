@@ -1,17 +1,16 @@
 <template>
-    <div class="container">
-        <div>
-            <transition name="fade" mode="out-in">
-                <component :is="currentlyActiveComponent"></component>
-            </transition>
-            <div id="buttons">
-                <button type="button" class="btn btn-primary" @click="switchToHourly">Hourly</button>
-                <button type="button" class="btn btn-primary" @click="switchToDaily">Daily</button>
-                <button type="button" class="btn btn-primary" @click="switchToMonthly">Monthly</button>
-                <button type="button" class="btn btn-primary" @click="switchToYearly">Yearly</button>
-            </div>
+    <div>
+        <div id="buttons">
+            <button type="button" class="btn btn-primary" @click="switchToHourly">Hourly</button>
+            <button type="button" class="btn btn-primary" @click="switchToDaily">Daily</button>
+            <button type="button" class="btn btn-primary" @click="switchToMonthly">Monthly</button>
+            <button type="button" class="btn btn-primary" @click="switchToYearly">Yearly</button>
         </div>
+        <transition name="fade" mode="out-in">
+            <component :is="currentlyActiveComponent"></component>
+        </transition>
     </div>
+
 </template>
 <style>
     .fade-enter-active, .fade-leave-active {

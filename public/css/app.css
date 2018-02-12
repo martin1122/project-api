@@ -8351,6 +8351,10 @@ button.close {
 }
 
 .readings-chart {
-  margin: 30px;
+  margin-top: 35px;
+}
+
+#buttons {
+  margin-bottom: 10px;
 }
 
