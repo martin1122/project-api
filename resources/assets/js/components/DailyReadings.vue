@@ -9,15 +9,14 @@
                           {{error.message}}
                         </li>
                     </ul>
-                    <div class="panel-body">
-                        {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from yesterday
-                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6 readings-chart" v-for="(device) in devices">
-                    
+                    <div class="panel-body">
+                        {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from yesterday
+                    </div>
                     <area-chart :data="[{name: device[0].id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
                     </area-chart> 
             </div>

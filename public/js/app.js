@@ -78365,7 +78365,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'HourlyReadings',
@@ -78459,17 +78458,7 @@ var render = function() {
                   ])
                 })
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.increaseDecreaseMessage) +
-                " by " +
-                _vm._s(_vm.increaseDecrease) +
-                " from an hour ago\n                "
-            )
-          ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -78482,6 +78471,16 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.increaseDecreaseMessage) +
+                  " by " +
+                  _vm._s(_vm.increaseDecrease) +
+                  " from an hour ago\n                "
+              )
+            ]),
+            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
@@ -78564,7 +78563,6 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
 //
 //
 //
@@ -78684,17 +78682,7 @@ var render = function() {
                   ])
                 })
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.increaseDecreaseMessage) +
-                " by " +
-                _vm._s(_vm.increaseDecrease) +
-                " from yesterday\n                "
-            )
-          ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -78707,6 +78695,16 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.increaseDecreaseMessage) +
+                  " by " +
+                  _vm._s(_vm.increaseDecrease) +
+                  " from yesterday\n                "
+              )
+            ]),
+            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
@@ -78911,17 +78909,7 @@ var render = function() {
                   ])
                 })
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.increaseDecreaseMessage) +
-                " by " +
-                _vm._s(_vm.increaseDecrease) +
-                " from last month\n                "
-            )
-          ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -78934,6 +78922,16 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.increaseDecreaseMessage) +
+                  " by " +
+                  _vm._s(_vm.increaseDecrease) +
+                  " from last month\n                "
+              )
+            ]),
+            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
@@ -79135,17 +79133,7 @@ var render = function() {
                   ])
                 })
               )
-            : _vm._e(),
-          _vm._v(" "),
-          _c("div", { staticClass: "panel-body" }, [
-            _vm._v(
-              "\n                    " +
-                _vm._s(_vm.increaseDecreaseMessage) +
-                " by " +
-                _vm._s(_vm.increaseDecrease) +
-                " from last year\n                "
-            )
-          ])
+            : _vm._e()
         ])
       ])
     ]),
@@ -79158,6 +79146,16 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
+            _c("div", { staticClass: "panel-body" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(_vm.increaseDecreaseMessage) +
+                  " by " +
+                  _vm._s(_vm.increaseDecrease) +
+                  " from last year\n                "
+              )
+            ]),
+            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [

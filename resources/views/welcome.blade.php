@@ -69,7 +69,7 @@
             </div>
         </div>
         <!-- Vue.js component -->
-        <div class="position-ref full-height">
+        <div class="">
             <div class="content">
                 <div id="app">
                     <component v-bind:is="currentView">
@@ -78,6 +78,9 @@
                 </div>
             </div>
         </div>
+        <footer class="footer">
+            <div class="container">&copy; CO600 Flood Sensor 2018</div>
+        </footer>
         <script src="{{asset('js/app.js')}}"></script>
         <script>
             window.Laravel = <?php echo json_encode([
