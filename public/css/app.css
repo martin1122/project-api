@@ -8350,3 +8350,7 @@ button.close {
   }
 }
 
+.readings-chart {
+  margin: 30px;
+}
+

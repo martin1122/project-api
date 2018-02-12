@@ -78744,12 +78744,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'MonthlyReadings',
     data: function data() {
         return {
             chartData: [],
+            devices: [],
             errors: [],
             increaseDecrease: 0,
             increaseDecreaseMessage: ''
@@ -78757,38 +78767,69 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     methods: {
+        // fetchData() {
+        //     this.axios.get(`api/device/abc4/reading/monthly?type='1'`)
+        //     .then(response => {
+        //         console.log(response);
+        //         for (var d in response.data) {
+        //             response.data[d].map(d => this.chartData.push([d.attributes.time, d.attributes.reading]));
+        //         }
+
+        //         this.calculateIncreaseDecreaseRange();
+        //     })
+        //     .catch(e => {
+        //       this.errors.push(e)
+        //     })
+        // },
         fetchData: function fetchData() {
             var _this = this;
 
-            this.axios.get('api/reading/monthly').then(function (response) {
-                console.log(response);
-                for (var d in response.data) {
-                    response.data[d].map(function (d) {
-                        return _this.chartData.push([d.attributes.time, d.attributes.reading]);
+            var responseArrays = [];
+            // Fetch all devices
+            this.axios.get('api/device').then(function (response) {
+                //console.log(response);
+                // For each device returned
+                for (var d in response.data.data) {
+
+                    // And fetch monthly readings for that particular device using its ID
+                    var deviceID = response.data.data[d].id;
+
+                    _this.axios.get('api/device/' + deviceID + '/reading/monthly?type=\'1\'').then(function (response) {
+
+                        // console.log(response);
+                        // Push each returned response (one for each device ID) into its own array
+
+                        for (var j in response.data) {
+                            // responseArrays.push(response.data[j]);
+                            _this.devices.push(response.data[j]);
+                        }
+                        console.log(_this.devices);
+
+                        // for(var i = 0; i < this.devices.length; i++) {
+                        //     console.log(this.devices[i]);
+                        // }
+                    }).catch(function (e) {
+                        _this.errors.push(e);
                     });
                 }
-
-                _this.calculateIncreaseDecreaseRange();
             }).catch(function (e) {
                 _this.errors.push(e);
             });
-        },
-        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(chartData) {
-            // Latest value in array (first one)
-            var latestReading = this.chartData[0][1];
-            // Oldest value in array (last one)
-            var oldestReading = this.chartData[this.chartData.length - 1][1];
 
-            // Calculate difference between first reading and last 
-            this.increaseDecrease = Math.abs(oldestReading - latestReading);
+            // Push the response data array into the devices array
+            // this.devices = responseArrays;
+            // console.log(this.devices);
 
-            // Determine whether it has increased or decreased
-            console.log(this.chartData);
-            if (latestReading > oldestReading) {
-                this.increaseDecreaseMessage = 'Up';
-            } else {
-                this.increaseDecreaseMessage = 'Down';
-            }
+            // for(var dev in this.devices) {
+            //     if (this.devices.hasOwnProperty(dev)) {
+            //         console.log(this.devices[dev]);
+            //      }
+            // }
+
+
+            // for (var i = 0; i < this.devices.length; i++) {
+            //     console.log(this.devices);
+            // }
         }
     },
     created: function created() {
@@ -78839,11 +78880,31 @@ var render = function() {
                   _vm._s(_vm.increaseDecreaseMessage) +
                   " by " +
                   _vm._s(_vm.increaseDecrease) +
-                  " from last month\n                   "
+                  " from last month\n                    "
               ),
-              _c("area-chart", { attrs: { data: _vm.chartData } })
+              _vm._l(_vm.devices, function(device) {
+                return _c(
+                  "div",
+                  { staticClass: "readings-chart" },
+                  [
+                    _c("area-chart", {
+                      attrs: {
+                        data: [
+                          {
+                            name: device[0].id,
+                            data: device.map(function(d) {
+                              return [d.attributes.time, d.attributes.reading]
+                            })
+                          }
+                        ]
+                      }
+                    })
+                  ],
+                  1
+                )
+              })
             ],
-            1
+            2
           )
         ])
       ])

@@ -67,7 +67,7 @@
             </div>
         </div>
         <!-- Vue.js component -->
-        <div class="flex-center position-ref full-height">
+        <div class="position-ref full-height">
             <div class="content">
                 <div id="app">
                     <component v-bind:is="currentView">
