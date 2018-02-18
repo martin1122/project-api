@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Area\DeviceController as AreaDeviceController;
 use Area\ReadingController as AreaReadingController;
 use Area\ErrorController as AreaErrorController;
+use Area\StatController as AreaStatController;
 use Device\ReadingController as DeviceReadingController;
 use Device\ErrorController as DeviceErrorController;
+use Device\StatController as DeviceStatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,7 @@ use Device\ErrorController as DeviceErrorController;
 Route::get('area', AreaController::class.'@index');
 Route::get('area/{area}', AreaController::class.'@show');
 Route::get('area/{area}/device', AreaDeviceController::class.'@index');
+Route::get('area/{area}/stat', AreaStatController::class.'@index');
 
 // Area Readings
 Route::get('area/{area}/reading', AreaReadingController::class.'@index');
@@ -42,6 +45,7 @@ Route::get('area/{area}/error/yearly', AreaErrorController::class.'@yearly');
 // Device
 Route::get('device', DeviceController::class.'@index');
 Route::get('device/{device}', DeviceController::class.'@show');
+Route::get('device/{device}/stat', DeviceStatController::class.'@index');
 
 // Device Readings
 Route::get('device/{device}/reading', DeviceReadingController::class.'@index');

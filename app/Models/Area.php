@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Device;
 use App\Models\Error;
+use App\Models\Stat;
 use Illuminate\Database\Eloquent\Model;
 
 class Area extends Model
@@ -34,6 +35,15 @@ class Area extends Model
     public function devices()
     {
         return $this->hasMany(Device::class);
+    }
+
+    public function stat($filters = [])
+    {
+        return [array_merge(
+            Stat::retrieve($filters, $this->devices()->pluck('id')->toArray())[0], [
+                'id' => $this->id
+            ]
+        )];
     }
 
     public function readings($period = null, $paginate = 0, $filters = [])
