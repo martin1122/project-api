@@ -29,10 +29,10 @@ class DeviceTransformer extends Fractal\TransformerAbstract
 	{
 	    return [
 	    	'id'         => $device->id,
+			'area_id'    => $device->area_id,
 	        'name'       => $device->name,
 	        'latitude'   => $device->latitude,
 			'longitude'  => $device->longitude,
-			'area_id'    => $device->area_id,
 			'created_at' => $device->created_at,
 			'updated_at' => $device->updated_at,
 			'deleted_at' => $device->deleted_at
