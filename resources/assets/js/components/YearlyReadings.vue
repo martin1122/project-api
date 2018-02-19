@@ -35,6 +35,7 @@
                 increaseDecreaseMessage: ''
             }
         },
+        props: ['from-date'],
         methods: {
             fetchData() {
                 // Fetch all devices

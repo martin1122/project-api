@@ -18593,7 +18593,7 @@ function applyToTag (styleElement, obj) {
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(140);
-module.exports = __webpack_require__(241);
+module.exports = __webpack_require__(244);
 
 
 /***/ }),
@@ -78102,7 +78102,7 @@ var normalizeComponent = __webpack_require__(6)
 /* script */
 var __vue_script__ = __webpack_require__(222)
 /* template */
-var __vue_template__ = __webpack_require__(240)
+var __vue_template__ = __webpack_require__(243)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78219,16 +78219,18 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue__ = __webpack_require__(223);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue__ = __webpack_require__(229);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue__ = __webpack_require__(232);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue__ = __webpack_require__(235);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Buttons_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue__ = __webpack_require__(223);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HourlyReadings_vue__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_HourlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_HourlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_DailyReadings_vue__ = __webpack_require__(229);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_DailyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_DailyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue__ = __webpack_require__(232);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_YearlyReadings_vue__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_YearlyReadings_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_YearlyReadings_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Buttons_vue__ = __webpack_require__(238);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Buttons_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Buttons_vue__);
 //
 //
 //
@@ -78251,6 +78253,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -78260,29 +78292,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Base',
-    components: { HourlyReadings: __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default.a, DailyReadings: __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default.a, MonthlyReadings: __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default.a, YearlyReadings: __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default.a },
+    components: { ThirtyMinuteReadings: __WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue___default.a, HourlyReadings: __WEBPACK_IMPORTED_MODULE_1__components_HourlyReadings_vue___default.a, DailyReadings: __WEBPACK_IMPORTED_MODULE_2__components_DailyReadings_vue___default.a, MonthlyReadings: __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue___default.a, YearlyReadings: __WEBPACK_IMPORTED_MODULE_4__components_YearlyReadings_vue___default.a },
     data: function data() {
         return {
-            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default.a
+            currentDate: new Date(),
+            fromDate: "2018-02-03T13:45:00",
+            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue___default.a
         };
     },
 
     methods: {
         switchToYearly: function switchToYearly() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_3__components_YearlyReadings_vue___default.a;
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_4__components_YearlyReadings_vue___default.a;
         },
         switchToMonthly: function switchToMonthly() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_2__components_MonthlyReadings_vue___default.a;
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue___default.a;
         },
         switchToDaily: function switchToDaily() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_1__components_DailyReadings_vue___default.a;
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_2__components_DailyReadings_vue___default.a;
         },
         switchToHourly: function switchToHourly() {
-            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_0__components_HourlyReadings_vue___default.a;
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_1__components_HourlyReadings_vue___default.a;
+        },
+        switchToThirtyMinutes: function switchToThirtyMinutes() {
+            this.currentlyActiveComponent = __WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue___default.a;
+        },
+        updateFromDate: function updateFromDate(event) {
+            // Update component variable with chosen html date
+            this.fromDate = event.target.value;
+
+            // const newDate = new Date(this.fromDate);
+
+            // Reformat to unix date for querying the DB
+            // const epochDate = newDate.valueOf();
+            // Update component variable with epoch version of chosen html date
+            // this.fromDate = newDate;
+
+            // Emit event which child listens to
+            this.$emit('handle');
         }
     },
     mounted: function mounted() {
         console.log('Base Component mounted.');
+
+        // this.currentDate = this.currentDate.toISOString();
+        console.log(this.currentDate.toISOString());
     }
 });
 
@@ -78296,6 +78350,242 @@ var normalizeComponent = __webpack_require__(6)
 var __vue_script__ = __webpack_require__(224)
 /* template */
 var __vue_template__ = __webpack_require__(225)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/ThirtyMinuteReadings.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5707e854", Component.options)
+  } else {
+    hotAPI.reload("data-v-5707e854", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 224 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'MonthlyReadings',
+    data: function data() {
+        return {
+            devices: [],
+            errors: [],
+            increaseDecrease: [],
+            increaseDecreaseMessage: ''
+        };
+    },
+
+    props: ['from-date'],
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            // Fetch all devices
+            this.axios.get('api/device').then(function (response) {
+                // For each device returned
+                for (var d in response.data.data) {
+
+                    // And fetch monthly readings for that particular device using its ID
+                    var deviceID = response.data.data[d].id;
+
+                    _this.axios.get('api/device/' + deviceID + '/reading').then(function (response) {
+
+                        // Push each returned response (one for each device ID) into its own array
+                        for (var j in response.data) {
+                            // Push devices into components array
+                            _this.devices.push(response.data[j]);
+                            // Push most recent and last reading of each device into component array
+                            _this.increaseDecrease.push({
+                                'first': response.data[j][d].attributes.reading,
+                                'last': response.data[j][response.data[j].length - 1].attributes.reading,
+                                'device': response.data[j][d].attributes.device_id
+                            });
+                        }
+                    }).catch(function (e) {
+                        _this.errors.push(e);
+                    });
+                }
+            }).catch(function (e) {
+                _this.errors.push(e);
+            });
+        },
+        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(devices) {
+            // Latest value in array (first one)
+            // var latestReading = this.chartData[0][1];
+            // // Oldest value in array (last one)
+            // var oldestReading = this.chartData[this.chartData.length-1][1];
+
+            // // Calculate difference between first reading and last 
+            // this.increaseDecrease = Math.abs(oldestReading - latestReading);
+
+            // // Determine whether it has increased or decreased
+            // console.log(this.chartData);
+            // if(latestReading > oldestReading) {
+            //     this.increaseDecreaseMessage = 'Up'
+            // } else {
+            //     this.increaseDecreaseMessage = 'Down'
+            // }
+        }
+    },
+    created: function created() {
+        this.fetchData();
+    },
+    mounted: function mounted() {
+        console.log('MonthlyReadings Component mounted.');
+        this.calculateIncreaseDecreaseRange(this.devices);
+    }
+});
+
+/***/ }),
+/* 225 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("Thirty Minute readings")
+          ]),
+          _vm._v(" "),
+          _vm.errors && _vm.errors.length
+            ? _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n                      " +
+                        _vm._s(error.message) +
+                        "\n                    "
+                    )
+                  ])
+                })
+              )
+            : _vm._e()
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.devices, function(device) {
+        return _c(
+          "div",
+          { staticClass: "col-6 readings-chart" },
+          [
+            _c("div", { staticClass: "panel-body" }),
+            _vm._v(" "),
+            _c("area-chart", {
+              attrs: {
+                data: [
+                  {
+                    name: device[0].id,
+                    data: device.map(function(d) {
+                      return [d.attributes.time, d.attributes.reading]
+                    })
+                  }
+                ]
+              }
+            })
+          ],
+          1
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-5707e854", module.exports)
+  }
+}
+
+/***/ }),
+/* 226 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(6)
+/* script */
+var __vue_script__ = __webpack_require__(227)
+/* template */
+var __vue_template__ = __webpack_require__(228)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78334,7 +78624,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 224 */
+/* 227 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78377,6 +78667,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    props: ['from-date'],
     methods: {
         fetchData: function fetchData() {
             var _this = this;
@@ -78430,7 +78721,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 225 */
+/* 228 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78511,15 +78802,15 @@ if (false) {
 }
 
 /***/ }),
-/* 226 */
+/* 229 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(227)
+var __vue_script__ = __webpack_require__(230)
 /* template */
-var __vue_template__ = __webpack_require__(228)
+var __vue_template__ = __webpack_require__(231)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78558,7 +78849,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 227 */
+/* 230 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -78601,6 +78892,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    props: ['from-date'],
     methods: {
         fetchData: function fetchData() {
             var _this = this;
@@ -78654,7 +78946,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 228 */
+/* 231 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -78735,15 +79027,15 @@ if (false) {
 }
 
 /***/ }),
-/* 229 */
+/* 232 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(230)
+var __vue_script__ = __webpack_require__(233)
 /* template */
-var __vue_template__ = __webpack_require__(231)
+var __vue_template__ = __webpack_require__(234)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -78772,233 +79064,6 @@ if (false) {(function () {
     hotAPI.createRecord("data-v-9df188a6", Component.options)
   } else {
     hotAPI.reload("data-v-9df188a6", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 230 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'MonthlyReadings',
-    data: function data() {
-        return {
-            devices: [],
-            errors: [],
-            increaseDecrease: 0,
-            increaseDecreaseMessage: ''
-        };
-    },
-
-    methods: {
-        fetchData: function fetchData() {
-            var _this = this;
-
-            // Fetch all devices
-            this.axios.get('api/device').then(function (response) {
-                // For each device returned
-                for (var d in response.data.data) {
-
-                    // And fetch monthly readings for that particular device using its ID
-                    var deviceID = response.data.data[d].id;
-
-                    _this.axios.get('api/device/' + deviceID + '/reading/monthly?type=\'1\'').then(function (response) {
-
-                        // Push each returned response (one for each device ID) into its own array
-                        for (var j in response.data) {
-                            _this.devices.push(response.data[j]);
-                        }
-                    }).catch(function (e) {
-                        _this.errors.push(e);
-                    });
-                }
-            }).catch(function (e) {
-                _this.errors.push(e);
-            });
-        },
-        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(devices) {
-            // Latest value in array (first one)
-            // var latestReading = this.chartData[0][1];
-            // // Oldest value in array (last one)
-            // var oldestReading = this.chartData[this.chartData.length-1][1];
-
-            // // Calculate difference between first reading and last 
-            // this.increaseDecrease = Math.abs(oldestReading - latestReading);
-
-            // // Determine whether it has increased or decreased
-            // console.log(this.chartData);
-            // if(latestReading > oldestReading) {
-            //     this.increaseDecreaseMessage = 'Up'
-            // } else {
-            //     this.increaseDecreaseMessage = 'Down'
-            // }
-        }
-    },
-    created: function created() {
-        this.fetchData();
-    },
-    mounted: function mounted() {
-        console.log('MonthlyReadings Component mounted.');
-        this.calculateIncreaseDecreaseRange(this.devices);
-    }
-});
-
-/***/ }),
-/* 231 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-lg-12" }, [
-        _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("Monthly readings")
-          ]),
-          _vm._v(" "),
-          _vm.errors && _vm.errors.length
-            ? _c(
-                "ul",
-                _vm._l(_vm.errors, function(error) {
-                  return _c("li", [
-                    _vm._v(
-                      "\n                      " +
-                        _vm._s(error.message) +
-                        "\n                    "
-                    )
-                  ])
-                })
-              )
-            : _vm._e()
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.devices, function(device) {
-        return _c(
-          "div",
-          { staticClass: "col-6 readings-chart" },
-          [
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.increaseDecreaseMessage) +
-                  " by " +
-                  _vm._s(_vm.increaseDecrease) +
-                  " from last month\n                "
-              )
-            ]),
-            _vm._v(" "),
-            _c("area-chart", {
-              attrs: {
-                data: [
-                  {
-                    name: device[0].id,
-                    data: device.map(function(d) {
-                      return [d.attributes.time, d.attributes.reading]
-                    })
-                  }
-                ]
-              }
-            })
-          ],
-          1
-        )
-      })
-    )
-  ])
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-9df188a6", module.exports)
-  }
-}
-
-/***/ }),
-/* 232 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(6)
-/* script */
-var __vue_script__ = __webpack_require__(233)
-/* template */
-var __vue_template__ = __webpack_require__(234)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/YearlyReadings.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-e77be4f0", Component.options)
-  } else {
-    hotAPI.reload("data-v-e77be4f0", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -79041,6 +79106,275 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'MonthlyReadings',
+    data: function data() {
+        return {
+            devices: [],
+            errors: [],
+            increaseDecrease: [],
+            increaseDecreaseMessage: ''
+        };
+    },
+
+    props: ['fromDate'],
+    methods: {
+        fetchData: function fetchData() {
+            var _this = this;
+
+            // Fetch all devices
+            this.axios.get('api/device').then(function (response) {
+                // For each device returned
+                for (var d in response.data.data) {
+
+                    // And fetch monthly readings for that particular device using its ID
+                    var deviceID = response.data.data[d].id;
+
+                    _this.axios.get('api/device/' + deviceID + '/reading/monthly?type=\'1\'').then(function (response) {
+                        // Push each returned response (one for each device ID) into its own array
+                        for (var j in response.data) {
+                            // Push devices into components array
+                            _this.devices.push(response.data[j]);
+                            // Push most recent and last reading of each device into component array
+                            _this.increaseDecrease.push({
+                                'prev': response.data[j][1].attributes.reading,
+                                'last': response.data[j][0].attributes.reading,
+                                'device': response.data[j][d].attributes.device_id
+                            });
+                        }
+
+                        console.log(_this.increaseDecrease);
+                    }).catch(function (e) {
+                        _this.errors.push(e);
+                    });
+                }
+            }).catch(function (e) {
+                _this.errors.push(e);
+            });
+        },
+        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
+
+            //
+        },
+        fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
+            var _this2 = this;
+
+            var deviceID;
+
+            for (var i = 0; i < this.devices.length; i++) {
+
+                deviceID = this.devices[i][i].attributes.device_id;
+
+                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                    console.log(response);
+                }).catch(function (e) {
+                    _this2.errors.push(e);
+                });
+            }
+        }
+    },
+    created: function created() {
+        this.fetchData();
+        // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+        this.$parent.$on('handle', this.fetchDataWithSelectedDate);
+        console.log(this.$props.fromDate);
+    },
+    mounted: function mounted() {
+        console.log('MonthlyReadings Component mounted.');
+
+        this.calculateIncreaseDecreaseRange();
+    }
+});
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-lg-12" }, [
+        _c("div", { staticClass: "panel panel-default" }, [
+          _c("div", { staticClass: "panel-heading" }, [
+            _vm._v("Monthly readings")
+          ]),
+          _vm._v(" "),
+          _vm.errors && _vm.errors.length
+            ? _c(
+                "ul",
+                _vm._l(_vm.errors, function(error) {
+                  return _c("li", [
+                    _vm._v(
+                      "\n                      " +
+                        _vm._s(error.message) +
+                        "\n                    "
+                    )
+                  ])
+                })
+              )
+            : _vm._e()
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.increaseDecrease, function(incDec) {
+          return _c("div", { staticClass: "col-3 readings-chart" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(incDec.device) +
+                " -> " +
+                _vm._s(
+                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
+                ) +
+                "\n                \n                " +
+                _vm._s(
+                  incDec.last > incDec.prev
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n            "
+            )
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.devices, function(device) {
+        return _c(
+          "div",
+          { staticClass: "col-6 readings-chart" },
+          [
+            _c("area-chart", {
+              attrs: {
+                data: [
+                  {
+                    name: device[0].attributes.device_id,
+                    data: device.map(function(d) {
+                      return [d.attributes.time, d.attributes.reading]
+                    })
+                  }
+                ]
+              }
+            })
+          ],
+          1
+        )
+      })
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-9df188a6", module.exports)
+  }
+}
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(6)
+/* script */
+var __vue_script__ = __webpack_require__(236)
+/* template */
+var __vue_template__ = __webpack_require__(237)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/YearlyReadings.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-e77be4f0", Component.options)
+  } else {
+    hotAPI.reload("data-v-e77be4f0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 236 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -79052,6 +79386,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    props: ['from-date'],
     methods: {
         fetchData: function fetchData() {
             var _this = this;
@@ -79105,7 +79440,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 234 */
+/* 237 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79186,19 +79521,19 @@ if (false) {
 }
 
 /***/ }),
-/* 235 */
+/* 238 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(236)
+  __webpack_require__(239)
 }
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(238)
+var __vue_script__ = __webpack_require__(241)
 /* template */
-var __vue_template__ = __webpack_require__(239)
+var __vue_template__ = __webpack_require__(242)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79237,13 +79572,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 236 */
+/* 239 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(237);
+var content = __webpack_require__(240);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -79263,7 +79598,7 @@ if(false) {
 }
 
 /***/ }),
-/* 237 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(137)(false);
@@ -79277,7 +79612,7 @@ exports.push([module.i, "\n.fade-enter-active, .fade-leave-active {\n  -webkit-t
 
 
 /***/ }),
-/* 238 */
+/* 241 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79314,7 +79649,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 239 */
+/* 242 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79343,7 +79678,7 @@ if (false) {
 }
 
 /***/ }),
-/* 240 */
+/* 243 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79353,59 +79688,141 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("div", { attrs: { id: "buttons" } }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button" },
-            on: { click: _vm.switchToHourly }
-          },
-          [_vm._v("Hourly")]
-        ),
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+            _c("div", { attrs: { id: "date-range" } }, [
+              _c("div", { staticClass: "form-group row" }, [
+                _c("div", { staticClass: "col-6" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-2 col-form-label",
+                      attrs: { for: "example-datetime-local-input" }
+                    },
+                    [_vm._v("From:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "datetime-local",
+                      value: "2018-02-03T13:45:00",
+                      id: "example-datetime-local-input date-from",
+                      "v-model": _vm.currentDate
+                    },
+                    on: { change: _vm.updateFromDate }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [_vm._v("From: " + _vm._s(_vm.fromDate))])
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button" },
-            on: { click: _vm.switchToDaily }
-          },
-          [_vm._v("Daily")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button" },
-            on: { click: _vm.switchToMonthly }
-          },
-          [_vm._v("Monthly")]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-primary",
-            attrs: { type: "button" },
-            on: { click: _vm.switchToYearly }
-          },
-          [_vm._v("Yearly")]
-        )
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-8 col-md-offset-2" }, [
+            _c("div", { attrs: { id: "buttons" } }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.switchToThirtyMinutes }
+                },
+                [_vm._v("Thirty Minutes")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.switchToHourly }
+                },
+                [_vm._v("Hourly")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.switchToDaily }
+                },
+                [_vm._v("Daily")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.switchToMonthly }
+                },
+                [_vm._v("Monthly")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.switchToYearly }
+                },
+                [_vm._v("Yearly")]
+              )
+            ])
+          ])
+        ])
       ]),
       _vm._v(" "),
       _c(
         "transition",
         { attrs: { name: "fade", mode: "out-in" } },
-        [_c(_vm.currentlyActiveComponent, { tag: "component" })],
+        [
+          _c(_vm.currentlyActiveComponent, {
+            tag: "component",
+            attrs: { fromDate: _vm.fromDate }
+          })
+        ],
         1
       )
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-6" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-2 col-form-label",
+          attrs: { for: "example-datetime-local-input" }
+        },
+        [_vm._v("To:")]
+      ),
+      _vm._v(" "),
+      _c("input", {
+        staticClass: "form-control",
+        attrs: {
+          type: "datetime-local",
+          value: "2018-02-19T15:57:20.62",
+          id: "example-datetime-local-input date-to"
+        }
+      }),
+      _vm._v(" "),
+      _c("p", [_vm._v("To: today")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -79416,7 +79833,7 @@ if (false) {
 }
 
 /***/ }),
-/* 241 */
+/* 244 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

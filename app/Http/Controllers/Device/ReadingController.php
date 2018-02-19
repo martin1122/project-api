@@ -131,7 +131,7 @@ class ReadingController extends Controller
         $resource = fractal($device->readings('m', $page, $filter), new ReadingTransformer())
             ->withResourceName('reading')
             ->toArray();
-
+        
         return response()->json($resource);
     }
 

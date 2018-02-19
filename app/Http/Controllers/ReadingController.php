@@ -116,7 +116,7 @@ class ReadingController extends Controller
      * @return \Illuminate\Http\Response The transformed json response
      */
     public function monthly(Request $request)
-    {
+    {   
         $filter = $request->query('filter', '');
         $filter = !empty($filter) ? explode(',', $filter) : [];
         $page = $request->query('page', 0);

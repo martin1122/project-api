@@ -33,7 +33,7 @@ Vue.use(VueChartkick, { Chartkick })
 window.app = new Vue({
   el: '#app',
   template: '<Base/>',
-  components: { Base }
+  components: { Base },
 });
 
 
