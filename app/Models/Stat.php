@@ -16,7 +16,17 @@ class Stat extends Model
     public static function retrieve($filters = [], $deviceId = null)
     {
         $results = InfluxDb::getQueryBuilder()
-        ->select('mean(reading) as average_reading, last(reading) as last_reading, mean(power) as average_power, last(power) as last_power')
+        ->select('
+            mean(reading) as average_reading, 
+            last(reading) as last_reading, 
+            count(reading) as count_reading, 
+            mean(prev_difference_val) as average_prev_difference_val, 
+            last(prev_difference_val) as last_prev_difference_val,
+            mean(prev_difference_pct) as average_prev_difference_pct, 
+            last(prev_difference_pct) as last_prev_difference_pct,
+            mean(power) as average_power, 
+            last(power) as last_power
+        ')
         ->from('readings');
 
         if (!empty($filters)) {
@@ -45,6 +55,6 @@ class Stat extends Model
         $results = InfluxDB::query($results)
                         ->getPoints();
 
-        return $results;
+        return $results[0];
     }
 }

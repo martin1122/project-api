@@ -31,8 +31,11 @@ class StatController extends Controller
         $filter = $request->query('filter', '');
         $filter = !empty($filter) ? explode(',', $filter) : [];
 
-        $resource = fractal($area->stat($filter), new StatTransformer())
+        $resource = fractal()
+            ->item($area->stat($filter))
+            ->transformWith(new StatTransformer())
             ->withResourceName('stat')
+            ->includeCharacters()
             ->toArray();
 
         return response()->json($resource);
