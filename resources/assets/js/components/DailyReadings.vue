@@ -12,12 +12,21 @@
                 </div>
             </div>
         </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-3 readings-chart" v-for="incDec in increaseDecrease">
+                    <!-- <p>{{ incDec.device }} -> Previous: {{ incDec.prev }}, Last: {{ incDec.last }}</p> -->
+                    {{ incDec.device }} -> {{ this.increaseDecrease = Math.abs(incDec.last - incDec.prev) }}
+                    
+                    {{ incDec.last > incDec.prev ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-6 readings-chart" v-for="(device) in devices">
-                    <div class="panel-body">
-                        {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from yesterday
-                    </div>
-                    <area-chart :data="[{name: device[0].id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
+                    
+                    <area-chart :data="[{name: device[0].attributes.device_id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
                     </area-chart> 
             </div>
         </div>
@@ -31,7 +40,7 @@
             return {
                 devices: [],
                 errors: [],
-                increaseDecrease: 0,
+                increaseDecrease: [],
                 increaseDecreaseMessage: ''
             }
         },
@@ -52,7 +61,16 @@
                             
                             // Push each returned response (one for each device ID) into its own array
                             for(var j in response.data) {
+                                // Push devices into components array
                                 this.devices.push(response.data[j]);
+                                // Push most recent and last reading of each device into component array
+                                this.increaseDecrease.push(
+                                    {
+                                        'prev': response.data[j][1].attributes.reading, 
+                                        'last': response.data[j][0].attributes.reading,
+                                        'device': response.data[j][d].attributes.device_id
+                                    }
+                                );
                             }
                         })
                         .catch(e => {

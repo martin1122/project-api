@@ -103,7 +103,7 @@
             console.log('Base Component mounted.') 
             
             // this.currentDate = this.currentDate.toISOString();
-            console.log(this.currentDate.toISOString());
+            // console.log(this.currentDate.toISOString());
         }
     }
 </script>

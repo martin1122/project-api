@@ -78336,7 +78336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log('Base Component mounted.');
 
         // this.currentDate = this.currentDate.toISOString();
-        console.log(this.currentDate.toISOString());
+        // console.log(this.currentDate.toISOString());
     }
 });
 
@@ -78429,6 +78429,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -78471,35 +78472,41 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     }).catch(function (e) {
                         _this.errors.push(e);
                     });
+
+                    console.log(_this.increaseDecrease);
                 }
             }).catch(function (e) {
                 _this.errors.push(e);
             });
         },
-        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(devices) {
-            // Latest value in array (first one)
-            // var latestReading = this.chartData[0][1];
-            // // Oldest value in array (last one)
-            // var oldestReading = this.chartData[this.chartData.length-1][1];
+        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
 
-            // // Calculate difference between first reading and last 
-            // this.increaseDecrease = Math.abs(oldestReading - latestReading);
+            //
+        },
+        fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
+            var _this2 = this;
 
-            // // Determine whether it has increased or decreased
-            // console.log(this.chartData);
-            // if(latestReading > oldestReading) {
-            //     this.increaseDecreaseMessage = 'Up'
-            // } else {
-            //     this.increaseDecreaseMessage = 'Down'
-            // }
+            var deviceID;
+
+            for (var i = 0; i < this.devices.length; i++) {
+
+                deviceID = this.devices[i][i].attributes.device_id;
+
+                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                    console.log(response);
+                }).catch(function (e) {
+                    _this2.errors.push(e);
+                });
+            }
         }
     },
     created: function created() {
         this.fetchData();
+        // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+        this.$parent.$on('handle', this.fetchDataWithSelectedDate);
     },
     mounted: function mounted() {
-        console.log('MonthlyReadings Component mounted.');
-        this.calculateIncreaseDecreaseRange(this.devices);
+        console.log('ThirtyMinuteReadings Component mounted.');
     }
 });
 
@@ -78537,6 +78544,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.increaseDecrease, function(incDec) {
+          return _c("div", { staticClass: "col-3 readings-chart" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(incDec.device) +
+                " -> " +
+                _vm._s(
+                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
+                ) +
+                "\n                \n                " +
+                _vm._s(
+                  incDec.last > incDec.prev
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n            "
+            )
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -78545,13 +78578,11 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
-            _c("div", { staticClass: "panel-body" }),
-            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
                   {
-                    name: device[0].id,
+                    name: device[0].attributes.device_id,
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -78655,6 +78686,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'HourlyReadings',
@@ -78662,7 +78702,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             devices: [],
             errors: [],
-            increaseDecrease: 0,
+            increaseDecrease: [],
             increaseDecreaseMessage: ''
         };
     },
@@ -78684,7 +78724,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                         // Push each returned response (one for each device ID) into its own array
                         for (var j in response.data) {
+                            // Push devices into components array
                             _this.devices.push(response.data[j]);
+                            // Push most recent and last reading of each device into component array
+                            _this.increaseDecrease.push({
+                                'prev': response.data[j][1].attributes.reading,
+                                'last': response.data[j][0].attributes.reading,
+                                'device': response.data[j][d].attributes.device_id
+                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -78694,26 +78741,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.errors.push(e);
             });
         },
-        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(chartData) {
-            // Latest value in array (first one)
-            var latestReading = this.chartData[0][1];
-            // Oldest value in array (last one)
-            var oldestReading = this.chartData[this.chartData.length - 1][1];
+        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
 
-            // Calculate difference between first reading and last 
-            this.increaseDecrease = Math.abs(oldestReading - latestReading);
+            //
+        },
+        fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
+            var _this2 = this;
 
-            // Determine whether it has increased or decreased
-            console.log(this.chartData);
-            if (latestReading > oldestReading) {
-                this.increaseDecreaseMessage = 'Up';
-            } else {
-                this.increaseDecreaseMessage = 'Down';
+            var deviceID;
+
+            for (var i = 0; i < this.devices.length; i++) {
+
+                deviceID = this.devices[i][i].attributes.device_id;
+
+                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                    console.log(response);
+                }).catch(function (e) {
+                    _this2.errors.push(e);
+                });
             }
         }
     },
     created: function created() {
         this.fetchData();
+        // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+        this.$parent.$on('handle', this.fetchDataWithSelectedDate);
     },
     mounted: function mounted() {
         console.log('HourlyReadings Component mounted.');
@@ -78754,6 +78806,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.increaseDecrease, function(incDec) {
+          return _c("div", { staticClass: "col-3 readings-chart" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(incDec.device) +
+                " -> " +
+                _vm._s(
+                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
+                ) +
+                "\n                \n                " +
+                _vm._s(
+                  incDec.last > incDec.prev
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n            "
+            )
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -78762,21 +78840,11 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.increaseDecreaseMessage) +
-                  " by " +
-                  _vm._s(_vm.increaseDecrease) +
-                  " from an hour ago\n                "
-              )
-            ]),
-            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
                   {
-                    name: device[0].id,
+                    name: device[0].attributes.device_id,
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -78880,6 +78948,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'DailyReadings',
@@ -78887,7 +78964,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             devices: [],
             errors: [],
-            increaseDecrease: 0,
+            increaseDecrease: [],
             increaseDecreaseMessage: ''
         };
     },
@@ -78909,7 +78986,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                         // Push each returned response (one for each device ID) into its own array
                         for (var j in response.data) {
+                            // Push devices into components array
                             _this.devices.push(response.data[j]);
+                            // Push most recent and last reading of each device into component array
+                            _this.increaseDecrease.push({
+                                'prev': response.data[j][1].attributes.reading,
+                                'last': response.data[j][0].attributes.reading,
+                                'device': response.data[j][d].attributes.device_id
+                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -78979,6 +79063,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.increaseDecrease, function(incDec) {
+          return _c("div", { staticClass: "col-3 readings-chart" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(incDec.device) +
+                " -> " +
+                _vm._s(
+                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
+                ) +
+                "\n                \n                " +
+                _vm._s(
+                  incDec.last > incDec.prev
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n            "
+            )
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -78987,21 +79097,11 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.increaseDecreaseMessage) +
-                  " by " +
-                  _vm._s(_vm.increaseDecrease) +
-                  " from yesterday\n                "
-              )
-            ]),
-            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
                   {
-                    name: device[0].id,
+                    name: device[0].attributes.device_id,
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -79189,12 +79289,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         this.fetchData();
         // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
         this.$parent.$on('handle', this.fetchDataWithSelectedDate);
-        console.log(this.$props.fromDate);
     },
     mounted: function mounted() {
         console.log('MonthlyReadings Component mounted.');
-
-        this.calculateIncreaseDecreaseRange();
     }
 });
 
@@ -79375,13 +79472,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             devices: [],
             errors: [],
-            increaseDecrease: 0,
+            increaseDecrease: [],
             increaseDecreaseMessage: ''
         };
     },
@@ -79403,8 +79509,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                         // Push each returned response (one for each device ID) into its own array
                         for (var j in response.data) {
+                            // Push devices into components array
                             _this.devices.push(response.data[j]);
+                            // Push most recent and last reading of each device into component array
+                            _this.increaseDecrease.push({
+                                'prev': response.data[j][1].attributes.reading,
+                                'last': response.data[j][0].attributes.reading,
+                                'device': response.data[j][d].attributes.device_id
+                            });
                         }
+
+                        console.log(_this.increaseDecrease);
                     }).catch(function (e) {
                         _this.errors.push(e);
                     });
@@ -79413,26 +79528,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.errors.push(e);
             });
         },
-        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange(chartData) {
-            // Latest value in array (first one)
-            var latestReading = this.chartData[0][1];
-            // Oldest value in array (last one)
-            var oldestReading = this.chartData[this.chartData.length - 1][1];
+        calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
 
-            // Calculate difference between first reading and last 
-            this.increaseDecrease = Math.abs(oldestReading - latestReading);
+            //
+        },
+        fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
+            var _this2 = this;
 
-            // Determine whether it has increased or decreased
-            console.log(this.chartData);
-            if (latestReading > oldestReading) {
-                this.increaseDecreaseMessage = 'Up';
-            } else {
-                this.increaseDecreaseMessage = 'Down';
+            var deviceID;
+
+            for (var i = 0; i < this.devices.length; i++) {
+
+                deviceID = this.devices[i][i].attributes.device_id;
+
+                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                    console.log(response);
+                }).catch(function (e) {
+                    _this2.errors.push(e);
+                });
             }
         }
     },
     created: function created() {
         this.fetchData();
+        // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+        this.$parent.$on('handle', this.fetchDataWithSelectedDate);
     },
     mounted: function mounted() {
         console.log('YearlyReadings Component mounted.');
@@ -79473,6 +79593,32 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
+    _c("div", { staticClass: "panel-body" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.increaseDecrease, function(incDec) {
+          return _c("div", { staticClass: "col-3 readings-chart" }, [
+            _vm._v(
+              "\n                " +
+                _vm._s(incDec.device) +
+                " -> " +
+                _vm._s(
+                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
+                ) +
+                "\n                \n                " +
+                _vm._s(
+                  incDec.last > incDec.prev
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n            "
+            )
+          ])
+        })
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -79481,21 +79627,11 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
-            _c("div", { staticClass: "panel-body" }, [
-              _vm._v(
-                "\n                    " +
-                  _vm._s(_vm.increaseDecreaseMessage) +
-                  " by " +
-                  _vm._s(_vm.increaseDecrease) +
-                  " from last year\n                "
-              )
-            ]),
-            _vm._v(" "),
             _c("area-chart", {
               attrs: {
                 data: [
                   {
-                    name: device[0].id,
+                    name: device[0].attributes.device_id,
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })

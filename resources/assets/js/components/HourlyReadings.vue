@@ -12,12 +12,21 @@
                 </div>
             </div>
         </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-3 readings-chart" v-for="incDec in increaseDecrease">
+                    <!-- <p>{{ incDec.device }} -> Previous: {{ incDec.prev }}, Last: {{ incDec.last }}</p> -->
+                    {{ incDec.device }} -> {{ this.increaseDecrease = Math.abs(incDec.last - incDec.prev) }}
+                    
+                    {{ incDec.last > incDec.prev ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-6 readings-chart" v-for="(device) in devices">
-                    <div class="panel-body">
-                        {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from an hour ago
-                    </div>
-                    <area-chart :data="[{name: device[0].id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
+                    
+                    <area-chart :data="[{name: device[0].attributes.device_id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
                     </area-chart> 
             </div>
         </div>
@@ -31,7 +40,7 @@
             return {
                 devices: [],
                 errors: [],
-                increaseDecrease: 0,
+                increaseDecrease: [],
                 increaseDecreaseMessage: ''
             }
         },
@@ -52,7 +61,16 @@
                             
                             // Push each returned response (one for each device ID) into its own array
                             for(var j in response.data) {
+                                // Push devices into components array
                                 this.devices.push(response.data[j]);
+                                // Push most recent and last reading of each device into component array
+                                this.increaseDecrease.push(
+                                    {
+                                        'prev': response.data[j][1].attributes.reading, 
+                                        'last': response.data[j][0].attributes.reading,
+                                        'device': response.data[j][d].attributes.device_id
+                                    }
+                                );
                             }
                         })
                         .catch(e => {
@@ -64,26 +82,34 @@
                   this.errors.push(e)
                 })
             },
-            calculateIncreaseDecreaseRange(chartData) {
-                // Latest value in array (first one)
-                var latestReading = this.chartData[0][1];
-                // Oldest value in array (last one)
-                var oldestReading = this.chartData[this.chartData.length-1][1];
+            calculateIncreaseDecreaseRange() {
+                
+                //
+            },
+            fetchDataWithSelectedDate() {
 
-                // Calculate difference between first reading and last 
-                this.increaseDecrease = Math.abs(oldestReading - latestReading);
-       
-                // Determine whether it has increased or decreased
-                console.log(this.chartData);
-                if(latestReading > oldestReading) {
-                    this.increaseDecreaseMessage = 'Up'
-                } else {
-                    this.increaseDecreaseMessage = 'Down'
-                }
-            }
+                var deviceID;
+
+                for(var i = 0; i < this.devices.length; i++) {
+                    
+                    deviceID = this.devices[i][i].attributes.device_id;
+
+                    this.axios.get(`/api/reading/?filter=time>='2018-02-03T13:45:00.000Z', device='${deviceID}'`)
+                    .then(response => {
+                        console.log(response);
+
+                    })
+                    .catch(e => {
+                      this.errors.push(e)
+                    })
+                }  
+            },
         }, 
         created() {
             this.fetchData();
+            // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+            this.$parent.$on('handle', this.fetchDataWithSelectedDate);
+            
         },
         mounted() {
             console.log('HourlyReadings Component mounted.')

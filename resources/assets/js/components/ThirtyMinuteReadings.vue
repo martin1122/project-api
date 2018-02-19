@@ -14,20 +14,21 @@
             </div>
         </div>
 
-        <!-- <div class="col-6 readings-chart" v-for="incDec in increaseDecrease">
-            <p>{{ incDec.device }} -> First: {{ incDec.first }}, Last: {{ incDec.last }}</p>
-            {{ this.increaseDecrease = Math.abs(incDec.last - incDec.first) }}
-
-            
-             {{ incDec.first > incDec.last ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
-        </div> -->
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-3 readings-chart" v-for="incDec in increaseDecrease">
+                    <!-- <p>{{ incDec.device }} -> Previous: {{ incDec.prev }}, Last: {{ incDec.last }}</p> -->
+                    {{ incDec.device }} -> {{ this.increaseDecrease = Math.abs(incDec.last - incDec.prev) }}
+                    
+                    {{ incDec.last > incDec.prev ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             <div class="col-6 readings-chart" v-for="(device) in devices">
-                    <div class="panel-body">
-                        <!-- {{ increaseDecreaseMessage }} by {{ increaseDecrease }} from last month -->
-                    </div>
-                    <area-chart :data="[{name: device[0].id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
+                    
+                    <area-chart :data="[{name: device[0].attributes.device_id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
                     </area-chart> 
             </div>
         </div>
@@ -79,7 +80,7 @@
                           this.errors.push(e)
                         })
 
-                        
+                        console.log(this.increaseDecrease);
                     }   
 
                 })
@@ -87,32 +88,37 @@
                   this.errors.push(e)
                 })
             },
+            calculateIncreaseDecreaseRange() {
+                
+                //
+            },
+            fetchDataWithSelectedDate() {
 
-            calculateIncreaseDecreaseRange(devices) {
-                // Latest value in array (first one)
-                // var latestReading = this.chartData[0][1];
-                // // Oldest value in array (last one)
-                // var oldestReading = this.chartData[this.chartData.length-1][1];
+                var deviceID;
 
-                // // Calculate difference between first reading and last 
-                // this.increaseDecrease = Math.abs(oldestReading - latestReading);
-       
-                // // Determine whether it has increased or decreased
-                // console.log(this.chartData);
-                // if(latestReading > oldestReading) {
-                //     this.increaseDecreaseMessage = 'Up'
-                // } else {
-                //     this.increaseDecreaseMessage = 'Down'
-                // }
-            }
+                for(var i = 0; i < this.devices.length; i++) {
+                    
+                    deviceID = this.devices[i][i].attributes.device_id;
+
+                    this.axios.get(`/api/reading/?filter=time>='2018-02-03T13:45:00.000Z', device='${deviceID}'`)
+                    .then(response => {
+                        console.log(response);
+
+                    })
+                    .catch(e => {
+                      this.errors.push(e)
+                    })
+                }  
+            },
         }, 
         created() {
             this.fetchData();
+            // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+            this.$parent.$on('handle', this.fetchDataWithSelectedDate);
             
         },
         mounted() {
-            console.log('MonthlyReadings Component mounted.')
-            this.calculateIncreaseDecreaseRange(this.devices);
+            console.log('ThirtyMinuteReadings Component mounted.')
         }
     }
 </script>

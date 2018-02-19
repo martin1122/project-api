@@ -107,22 +107,17 @@
                     .catch(e => {
                       this.errors.push(e)
                     })
-                }
-
-                
+                }  
             },
         }, 
         created() {
             this.fetchData();
             // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
             this.$parent.$on('handle', this.fetchDataWithSelectedDate);
-            console.log(this.$props.fromDate);
             
         },
         mounted() {
             console.log('MonthlyReadings Component mounted.')
-
-            this.calculateIncreaseDecreaseRange();
         }
     }
 </script>
