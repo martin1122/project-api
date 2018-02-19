@@ -71,9 +71,10 @@ class Reading extends Model
         if ($page > 0) {
             $results .= sprintf(' OFFSET %s', $page * 500);
         }
+        
 
         $results = InfluxDB::query($results);
-
+        
         if (!empty($period)) {
             $results = self::hydrateResultSet($results);
         } else {

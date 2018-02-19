@@ -28,7 +28,10 @@ class StatController extends Controller
      */
     public function index(Request $request, Area $area)
     {
-        $resource = fractal($area->stats(), new StatTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+
+        $resource = fractal($area->stat($filter), new StatTransformer())
             ->withResourceName('stat')
             ->toArray();
 

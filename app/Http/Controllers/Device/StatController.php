@@ -28,7 +28,10 @@ class StatController extends Controller
      */
     public function index(Request $request, Device $device)
     {
-        $resource = fractal($device->stats(), new StatTransformer())
+        $filter = $request->query('filter', '');
+        $filter = !empty($filter) ? explode(',', $filter) : [];
+
+        $resource = fractal($device->stat($filter), new StatTransformer())
             ->withResourceName('stat')
             ->toArray();
 
