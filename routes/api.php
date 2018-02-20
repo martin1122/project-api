@@ -22,6 +22,9 @@ use Device\StatController as DeviceStatController;
 |
 */
 
+// Stat
+Route::get('stat', StatController::class.'@index');
+
 // Area
 Route::get('area', AreaController::class.'@index');
 Route::get('area/{area}', AreaController::class.'@show');

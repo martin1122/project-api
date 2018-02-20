@@ -26,7 +26,7 @@ class StatTransformer extends Fractal\TransformerAbstract
     public function transform($data)
     {
         return [
-            'id'                          => array_get($data, 'id'),
+            'id'                          => array_get($data, 'id', 'all'),
             'average_reading'             => array_get($data, 'average_reading'),
             'last_reading'                => array_get($data, 'last_reading'),
             'count_reading'               => array_get($data, 'count_reading'),

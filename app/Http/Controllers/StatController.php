@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Stat;
+use App\Models\Stat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\StatTransformer;
