@@ -78324,22 +78324,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // Update component variable with chosen html date
             this.fromDate = event.target.value;
 
-            // const newDate = new Date(this.fromDate);
-
-            // Reformat to unix date for querying the DB
-            // const epochDate = newDate.valueOf();
-            // Update component variable with epoch version of chosen html date
-            // this.fromDate = newDate;
-
             // Emit event which child listens to
             this.$emit('handle');
         }
     },
     mounted: function mounted() {
         console.log('Base Component mounted.');
+    },
+    created: function created() {
+        console.log(this.currentDate);
 
-        // this.currentDate = this.currentDate.toISOString();
-        // console.log(this.currentDate.toISOString());
+        // Convert to correct format 
+        this.currentDate = this.currentDate.toISOString();
+        console.log(this.currentDate);
     }
 });
 
@@ -78491,12 +78488,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var deviceID;
 
+            var fetchedReadings = [];
+
             for (var i = 0; i < this.devices.length; i++) {
 
                 deviceID = this.devices[i][i].attributes.device_id;
 
-                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                this.axios.get('api/device/' + deviceID + '/reading/?filter=time>=\'' + this.$props.fromDate + 'Z\',time<=now()').then(function (response) {
                     console.log(response);
+
+                    // Push each returned response (one for each device ID) into its own array
+                    for (var j in response.data) {
+                        var _devices;
+
+                        // Push devices into components array
+                        fetchedReadings.push(response.data[j]);
+
+                        (_devices = _this2.devices).splice.apply(_devices, [0, fetchedReadings.length].concat(fetchedReadings));
+                    }
                 }).catch(function (e) {
                     _this2.errors.push(e);
                 });
@@ -78753,12 +78762,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var deviceID;
 
+            var fetchedReadings = [];
+
             for (var i = 0; i < this.devices.length; i++) {
 
                 deviceID = this.devices[i][i].attributes.device_id;
 
-                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                this.axios.get('api/device/' + deviceID + '/reading/hourly?filter=time>=\'' + this.$props.fromDate + 'Z\',time<=now()').then(function (response) {
                     console.log(response);
+
+                    // Push each returned response (one for each device ID) into its own array
+                    for (var j in response.data) {
+                        var _devices;
+
+                        // Push devices into components array
+                        fetchedReadings.push(response.data[j]);
+
+                        (_devices = _this2.devices).splice.apply(_devices, [0, fetchedReadings.length].concat(fetchedReadings));
+                    }
                 }).catch(function (e) {
                     _this2.errors.push(e);
                 });
@@ -79022,10 +79043,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 this.increaseDecreaseMessage = 'Down';
             }
+        },
+        fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
+            var _this2 = this;
+
+            var deviceID;
+
+            var fetchedReadings = [];
+
+            for (var i = 0; i < this.devices.length; i++) {
+
+                deviceID = this.devices[i][i].attributes.device_id;
+
+                this.axios.get('api/device/' + deviceID + '/reading/daily?filter=time>=\'' + this.$props.fromDate + 'Z\',time<=now()').then(function (response) {
+                    console.log(response);
+
+                    // Push each returned response (one for each device ID) into its own array
+                    for (var j in response.data) {
+                        var _devices;
+
+                        // Push devices into components array
+                        fetchedReadings.push(response.data[j]);
+
+                        (_devices = _this2.devices).splice.apply(_devices, [0, fetchedReadings.length].concat(fetchedReadings));
+                    }
+                }).catch(function (e) {
+                    _this2.errors.push(e);
+                });
+            }
         }
     },
     created: function created() {
         this.fetchData();
+        // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+        this.$parent.$on('handle', this.fetchDataWithSelectedDate);
     },
     mounted: function mounted() {
         console.log('DailyReadings Component mounted.');
@@ -79232,7 +79283,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
-    props: ['fromDate'],
+    props: ['fromDate', 'currentDate'],
     methods: {
         fetchData: function fetchData() {
             var _this = this;
@@ -79273,7 +79324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             var deviceID;
-
+            console.log(this.$props.fromDate);
             var fetchedReadings = [];
 
             for (var i = 0; i < this.devices.length; i++) {
@@ -79281,8 +79332,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 deviceID = this.devices[i][i].attributes.device_id;
 
                 // `api/reading/monthly?filter=device='${deviceID}',time>='2018-02-05T00:00:00Z',time<='now()'`
-                this.axios.get('api/device/abc4/reading/monthly?filter=time>=\'2017-10-25T00:00:00Z\',time<=\'2018-02-05T00:00:00Z\'').then(function (response) {
-                    // console.log(response);
+                this.axios.get('api/device/' + deviceID + '/reading/monthly?filter=time>=\'' + this.$props.fromDate + 'Z\',time<=now()').then(function (response) {
+                    console.log(response);
 
                     // Push each returned response (one for each device ID) into its own array
                     for (var j in response.data) {
@@ -79551,12 +79602,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             var deviceID;
 
+            var fetchedReadings = [];
+
             for (var i = 0; i < this.devices.length; i++) {
 
                 deviceID = this.devices[i][i].attributes.device_id;
 
-                this.axios.get('/api/reading/?filter=time>=\'2018-02-03T13:45:00.000Z\', device=\'' + deviceID + '\'').then(function (response) {
+                this.axios.get('api/device/' + deviceID + '/reading/yearly?filter=time>=\'' + this.$props.fromDate + 'Z\',time<=now()').then(function (response) {
                     console.log(response);
+
+                    // Push each returned response (one for each device ID) into its own array
+                    for (var j in response.data) {
+                        var _devices;
+
+                        // Push devices into components array
+                        fetchedReadings.push(response.data[j]);
+
+                        (_devices = _this2.devices).splice.apply(_devices, [0, fetchedReadings.length].concat(fetchedReadings));
+                    }
                 }).catch(function (e) {
                     _this2.errors.push(e);
                 });
@@ -79864,8 +79927,7 @@ var render = function() {
                     attrs: {
                       type: "datetime-local",
                       value: "2018-02-03T13:45:00",
-                      id: "example-datetime-local-input date-from",
-                      "v-model": _vm.currentDate
+                      id: "example-datetime-local-input date-from"
                     },
                     on: { change: _vm.updateFromDate }
                   }),
@@ -79942,7 +80004,7 @@ var render = function() {
         [
           _c(_vm.currentlyActiveComponent, {
             tag: "component",
-            attrs: { fromDate: _vm.fromDate }
+            attrs: { fromDate: _vm.fromDate, currentDate: _vm.currentDate }
           })
         ],
         1
@@ -79970,7 +80032,7 @@ var staticRenderFns = [
         staticClass: "form-control",
         attrs: {
           type: "datetime-local",
-          value: "2018-02-19T15:57:20.62",
+          value: "2018-03-09T13:45:00",
           id: "example-datetime-local-input date-to"
         }
       }),

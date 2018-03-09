@@ -47,7 +47,7 @@
                 increaseDecreaseMessage: ''
             }
         },
-        props: ['fromDate'],
+        props: ['fromDate', 'currentDate'],
         methods: {
             fetchData() {
                 // Fetch all devices
@@ -92,7 +92,7 @@
             fetchDataWithSelectedDate() {
 
                 var deviceID;
-
+                console.log(this.$props.fromDate);
                 var fetchedReadings = [];
 
                 for(var i = 0; i < this.devices.length; i++) {
@@ -100,9 +100,9 @@
                     deviceID = this.devices[i][i].attributes.device_id;
                     
                     // `api/reading/monthly?filter=device='${deviceID}',time>='2018-02-05T00:00:00Z',time<='now()'`
-                    this.axios.get(`api/device/abc4/reading/monthly?filter=time>='2017-10-25T00:00:00Z',time<='2018-02-05T00:00:00Z'`)
+                    this.axios.get(`api/device/${deviceID}/reading/monthly?filter=time>='${this.$props.fromDate}Z',time<=now()`)
                     .then(response => {
-                        // console.log(response);
+                        console.log(response);
 
                         // Push each returned response (one for each device ID) into its own array
                         for(var j in response.data) {

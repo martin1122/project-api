@@ -91,15 +91,24 @@
             fetchDataWithSelectedDate() {
 
                 var deviceID;
-                
+
+                var fetchedReadings = [];
+
                 for(var i = 0; i < this.devices.length; i++) {
                     
                     deviceID = this.devices[i][i].attributes.device_id;
 
-                    this.axios.get(`/api/reading/?filter=time>='2018-02-03T13:45:00.000Z', device='${deviceID}'`)
+                    this.axios.get(`api/device/${deviceID}/reading/yearly?filter=time>='${this.$props.fromDate}Z',time<=now()`)
                     .then(response => {
                         console.log(response);
 
+                        // Push each returned response (one for each device ID) into its own array
+                        for(var j in response.data) {
+                            // Push devices into components array
+                            fetchedReadings.push(response.data[j]);
+
+                            this.devices.splice(0, fetchedReadings.length, ...fetchedReadings);
+                        }
                     })
                     .catch(e => {
                       this.errors.push(e)

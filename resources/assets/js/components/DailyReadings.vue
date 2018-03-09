@@ -98,10 +98,39 @@
                 } else {
                     this.increaseDecreaseMessage = 'Down'
                 }
-            }
+            },
+            fetchDataWithSelectedDate() {
+
+                var deviceID;
+
+                var fetchedReadings = [];
+
+                for(var i = 0; i < this.devices.length; i++) {
+                    
+                    deviceID = this.devices[i][i].attributes.device_id;
+
+                    this.axios.get(`api/device/${deviceID}/reading/daily?filter=time>='${this.$props.fromDate}Z',time<=now()`)
+                    .then(response => {
+                        console.log(response);
+
+                        // Push each returned response (one for each device ID) into its own array
+                        for(var j in response.data) {
+                            // Push devices into components array
+                            fetchedReadings.push(response.data[j]);
+
+                            this.devices.splice(0, fetchedReadings.length, ...fetchedReadings);
+                        }
+                    })
+                    .catch(e => {
+                      this.errors.push(e)
+                    })
+                }  
+            },
         }, 
         created() {
             this.fetchData();
+            // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
+            this.$parent.$on('handle', this.fetchDataWithSelectedDate);
         },
         mounted() {
             console.log('DailyReadings Component mounted.')

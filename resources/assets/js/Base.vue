@@ -8,12 +8,12 @@
                             
                             <div class="col-6">
                                 <label for="example-datetime-local-input" class="col-2 col-form-label">From:</label>
-                                <input class="form-control" type="datetime-local" value="2018-02-03T13:45:00" id="example-datetime-local-input date-from" @change="updateFromDate" :v-model="currentDate">
+                                <input class="form-control" type="datetime-local" value="2018-02-03T13:45:00" id="example-datetime-local-input date-from" @change="updateFromDate">
                                 <p>From: {{ fromDate }}</p>
                             </div>
                             <div class="col-6">
                                 <label for="example-datetime-local-input" class="col-2 col-form-label">To:</label>
-                                <input class="form-control" type="datetime-local" value="2018-02-19T15:57:20.62" id="example-datetime-local-input date-to">
+                                <input class="form-control" type="datetime-local" value="2018-03-09T13:45:00" id="example-datetime-local-input date-to">
                                 <p>To: today</p>
                             </div>
                             
@@ -35,7 +35,7 @@
             </div>
         </div>
         <transition name="fade" mode="out-in">
-            <component v-bind:fromDate="fromDate" :is="currentlyActiveComponent"></component>
+            <component v-bind:fromDate="fromDate" v-bind:currentDate="currentDate" :is="currentlyActiveComponent"></component>
         </transition>
     </div>
 
@@ -89,22 +89,19 @@
                 // Update component variable with chosen html date
                 this.fromDate = event.target.value;
 
-                // const newDate = new Date(this.fromDate);
-
-                // Reformat to unix date for querying the DB
-                // const epochDate = newDate.valueOf();
-                // Update component variable with epoch version of chosen html date
-                // this.fromDate = newDate;
-
                 // Emit event which child listens to
                 this.$emit('handle')
             },
         },
         mounted() {
-            console.log('Base Component mounted.') 
-            
-            // this.currentDate = this.currentDate.toISOString();
-            // console.log(this.currentDate.toISOString());
+            console.log('Base Component mounted.');             
+        },
+        created() {
+            console.log(this.currentDate);
+
+            // Convert to correct format 
+            this.currentDate = this.currentDate.toISOString();
+            console.log(this.currentDate);
         }
     }
 </script>
