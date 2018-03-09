@@ -18,8 +18,8 @@ class Reading extends Model
     {
         switch ($period) {
             case 'm':
-                $period = 'w';
-                $number = 4;
+                $period = 'd';
+                $number = 30;
                 break;
             case 'y':
                 $period = 'd';
