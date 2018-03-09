@@ -16,8 +16,10 @@ class AreaTransformer extends Fractal\TransformerAbstract
     protected $availableIncludes = [
 		'parent',
 		'children',
-		'devices',
-		'readings',
+        'devices',
+        'stat',
+        'readings',
+        'stillHeres',
 		'errors',
     ];
 
@@ -69,6 +71,19 @@ class AreaTransformer extends Fractal\TransformerAbstract
     public function includeDevices(Area $area)
     {
         return $this->collection($area->devices, new DeviceTransformer, 'device');
+    }
+    
+    /**
+     * Include stat
+     *
+     * @return League\Fractal\ItemResource
+     */
+    public function includeStat(Area $area)
+    {
+        if (!empty($area->stat)) {
+            return $this->item($area->stat, new StatTransformer, 'stat');
+        }
+        return $this->null();
 	}
 	
 	/**
@@ -79,6 +94,16 @@ class AreaTransformer extends Fractal\TransformerAbstract
     public function includeReadings(Area $area)
     {
         return $this->collection($area->readings(), new ReadingTransformer, 'reading');
+    }
+    
+    /**
+     * Include readings
+     *
+     * @return League\Fractal\CollectionResource
+     */
+    public function includeStillHeres(Area $area)
+    {
+        return $this->collection($area->stillHeres(), new StillHereTransformer, 'still_here');
 	}
 	
 	/**

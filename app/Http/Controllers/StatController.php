@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Stat;
+use App\Models\Stat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Transformers\StatTransformer;
@@ -26,8 +26,11 @@ class StatController extends Controller
      */
     public function index(Request $request)
     {
-        $resource = fractal(Stat::retrieve(), new StatTransformer())
+        $resource = fractal()
+            ->item(Stat::retrieve())
+            ->transformWith(new StatTransformer())
             ->withResourceName('stat')
+            ->includeCharacters()
             ->toArray();
 
         return response()->json($resource);

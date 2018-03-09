@@ -15,7 +15,7 @@ class CreateDevicesTable extends Migration
     {
         Schema::create('devices', function (Blueprint $table) {
             $table->string('id')->unique();
-            $table->string('area_id');
+            $table->string('area_id')->nullable();
             $table->string('name');
             $table->decimal('latitude', 8, 6);
             $table->decimal('longitude', 9, 6);

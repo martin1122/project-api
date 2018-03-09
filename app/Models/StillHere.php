@@ -8,7 +8,7 @@ use League\Fractal;
 use DateTime;
 use App\Traits\HydrateInfluxTrait;
 
-class Reading extends Model
+class StillHere extends Model
 {
     use HydrateInfluxTrait;
 
@@ -32,15 +32,10 @@ class Reading extends Model
 
         $results = InfluxDb::getQueryBuilder()
             ->select('*')
-            ->from('readings');
+            ->from('still_heres');
         
         if (!empty($period)) {
-            $results = $results->select('
-                    mean(reading) as reading, 
-                    mean(prev_difference_val) as prev_difference_val, 
-                    mean(prev_difference_pct) as prev_difference_pct, 
-                    mean(power) as power
-                ')  
+            $results = $results->select('mean(power) as power')  
                 ->groupBy("time({$number}{$period}), device, type, display_type");
         } 
 
