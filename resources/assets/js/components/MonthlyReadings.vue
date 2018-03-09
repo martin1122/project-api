@@ -74,8 +74,6 @@
                                     }
                                 );
                             }
-
-                            console.log(this.increaseDecrease);
                         })
                         .catch(e => {
                           this.errors.push(e)
@@ -95,14 +93,24 @@
 
                 var deviceID;
 
+                var fetchedReadings = [];
+
                 for(var i = 0; i < this.devices.length; i++) {
                     
                     deviceID = this.devices[i][i].attributes.device_id;
-
-                    this.axios.get(`/api/reading/?filter=time>='2018-02-03T13:45:00.000Z', device='${deviceID}'`)
+                    
+                    // `api/reading/monthly?filter=device='${deviceID}',time>='2018-02-05T00:00:00Z',time<='now()'`
+                    this.axios.get(`api/device/abc4/reading/monthly?filter=time>='2017-10-25T00:00:00Z',time<='2018-02-05T00:00:00Z'`)
                     .then(response => {
-                        console.log(response);
+                        // console.log(response);
 
+                        // Push each returned response (one for each device ID) into its own array
+                        for(var j in response.data) {
+                            // Push devices into components array
+                            fetchedReadings.push(response.data[j]);
+
+                            this.devices.splice(0, fetchedReadings.length, ...fetchedReadings);
+                        }
                     })
                     .catch(e => {
                       this.errors.push(e)

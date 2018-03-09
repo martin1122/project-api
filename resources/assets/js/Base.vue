@@ -57,6 +57,7 @@
     import MonthlyReadings from './components/MonthlyReadings.vue';
     import YearlyReadings from './components/YearlyReadings.vue';
     import Buttons from './components/Buttons.vue';
+    import Datepicker from 'vuejs-datepicker';
 
     export default {
         name: 'Base',
