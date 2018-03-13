@@ -14,21 +14,11 @@
             </div>
         </div>
 
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-3 readings-chart" v-for="incDec in increaseDecrease">
-                    <!-- <p>{{ incDec.device }} -> Previous: {{ incDec.prev }}, Last: {{ incDec.last }}</p> -->
-                    {{ incDec.device }} -> {{ this.increaseDecrease = Math.abs(incDec.last - incDec.prev) }}
-                    
-                    {{ incDec.last > incDec.prev ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
-                </div>
-            </div>
-        </div>
-
         <div class="row">
             <div class="col-6 readings-chart" v-for="(device) in devices">
-                    
-                    <area-chart :data="[{name: device[0].attributes.device_id, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
+                    {{ device[0].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down' }}
+
+                    <area-chart :data="[{name: device[0].attributes.prev_difference_val.toFixed(2) + ' ' + this.increaseDecreaseMessage, data: device.map(d => [d.attributes.time, d.attributes.reading])}]">
                     </area-chart> 
             </div>
         </div>
@@ -49,7 +39,11 @@
         },
         props: ['fromDate', 'currentDate'],
         methods: {
-            fetchData() {
+            /**
+             * [fetchData description]
+             * @return {[type]} [description]
+             */
+            fetchData(callback) {
                 // Fetch all devices
                 this.axios.get(`api/device`)
                 .then(response => {
@@ -84,11 +78,22 @@
                   this.errors.push(e)
                 })
             },
-
+            /**
+             * [calculateIncreaseDecreaseRange description]
+             * @return {[type]} [description]
+             */
             calculateIncreaseDecreaseRange() {
                 
-                //
+                console.log(this.devices);
+                for(var i = 0; i < this.devices.length; i++) {
+                    // console.log(data[i]);
+                    this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
+                }
             },
+            /**
+             * [fetchDataWithSelectedDate description]
+             * @return {[type]} [description]
+             */
             fetchDataWithSelectedDate() {
 
                 var deviceID;
@@ -118,14 +123,31 @@
                 }  
             },
         }, 
+        /**
+         * [created description]
+         * @return {[type]} [description]
+         */
         created() {
-            this.fetchData();
+            this.fetchData(this.calculateIncreaseDecreaseRange);
             // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
             this.$parent.$on('handle', this.fetchDataWithSelectedDate);
-            
+
+            var callback = function() {
+
+                console.log(this.devices);
+                for(var i = 0; i < this.devices.length; i++) {
+                    // console.log(data[i]);
+                    this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
+                }
+            }
         },
+        /**
+         * [mounted description]
+         * @return {[type]} [description]
+         */
         mounted() {
             console.log('MonthlyReadings Component mounted.')
+            
         }
     }
 </script>

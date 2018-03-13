@@ -79260,16 +79260,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79285,7 +79275,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['fromDate', 'currentDate'],
     methods: {
-        fetchData: function fetchData() {
+        /**
+         * [fetchData description]
+         * @return {[type]} [description]
+         */
+        fetchData: function fetchData(callback) {
             var _this = this;
 
             // Fetch all devices
@@ -79316,10 +79310,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this.errors.push(e);
             });
         },
+
+        /**
+         * [calculateIncreaseDecreaseRange description]
+         * @return {[type]} [description]
+         */
         calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
 
-            //
+            console.log(this.devices);
+            for (var i = 0; i < this.devices.length; i++) {
+                // console.log(data[i]);
+                this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
+            }
         },
+
+        /**
+         * [fetchDataWithSelectedDate description]
+         * @return {[type]} [description]
+         */
         fetchDataWithSelectedDate: function fetchDataWithSelectedDate() {
             var _this2 = this;
 
@@ -79350,11 +79358,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         }
     },
+    /**
+     * [created description]
+     * @return {[type]} [description]
+     */
     created: function created() {
-        this.fetchData();
+        this.fetchData(this.calculateIncreaseDecreaseRange);
         // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
         this.$parent.$on('handle', this.fetchDataWithSelectedDate);
+
+        var callback = function callback() {
+
+            console.log(this.devices);
+            for (var i = 0; i < this.devices.length; i++) {
+                // console.log(data[i]);
+                this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
+            }
+        };
     },
+
+    /**
+     * [mounted description]
+     * @return {[type]} [description]
+     */
     mounted: function mounted() {
         console.log('MonthlyReadings Component mounted.');
     }
@@ -79394,32 +79420,6 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.increaseDecrease, function(incDec) {
-          return _c("div", { staticClass: "col-3 readings-chart" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(incDec.device) +
-                " -> " +
-                _vm._s(
-                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
-                ) +
-                "\n                \n                " +
-                _vm._s(
-                  incDec.last > incDec.prev
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n            "
-            )
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -79428,11 +79428,23 @@ var render = function() {
           "div",
           { staticClass: "col-6 readings-chart" },
           [
+            _vm._v(
+              "\n                " +
+                _vm._s(
+                  device[0].attributes.prev_difference_val > 0
+                    ? (this.increaseDecreaseMessage = "Up")
+                    : (this.increaseDecreaseMessage = "Down")
+                ) +
+                "\n\n                "
+            ),
             _c("area-chart", {
               attrs: {
                 data: [
                   {
-                    name: device[0].attributes.device_id,
+                    name:
+                      device[0].attributes.prev_difference_val.toFixed(2) +
+                      " " +
+                      this.increaseDecreaseMessage,
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
