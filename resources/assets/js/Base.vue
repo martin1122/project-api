@@ -9,12 +9,10 @@
                             <div class="col-6">
                                 <label for="example-datetime-local-input" class="col-2 col-form-label">From:</label>
                                 <input class="form-control" type="datetime-local" value="2018-02-03T13:45:00" id="example-datetime-local-input date-from" @change="updateFromDate">
-                                <p>From: {{ fromDate }}</p>
                             </div>
                             <div class="col-6">
                                 <label for="example-datetime-local-input" class="col-2 col-form-label">To:</label>
-                                <input class="form-control" type="datetime-local" value="2018-03-09T13:45:00" id="example-datetime-local-input date-to">
-                                <p>To: today</p>
+                                <input class="form-control" type="datetime-local" value="2018-03-16T13:45:00" id="example-datetime-local-input date-to">
                             </div>
                             
                         </div>
@@ -66,7 +64,7 @@
             return {
                 currentDate: new Date(),
                 fromDate: "2018-02-03T13:45:00",
-                currentlyActiveComponent: MonthlyReadings,
+                currentlyActiveComponent: ThirtyMinuteReadings,
             }
         },
         methods: {

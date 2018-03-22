@@ -63,7 +63,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
                     <div class="panel panel-default">
-                        <div class="panel-heading title flex-center">River Stour readings</div>
+                        <div class="panel-heading title flex-center">Flood Watch</div>
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
         <footer class="footer">
-            <div class="container">&copy; CO600 Flood Sensor 2018</div>
+            <div class="container">&copy; CO600 Flood Watch 2018</div>
         </footer>
         <script src="{{asset('js/app.js')}}"></script>
         <script>

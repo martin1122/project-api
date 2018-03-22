@@ -78281,8 +78281,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 
@@ -78300,7 +78298,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             currentDate: new Date(),
             fromDate: "2018-02-03T13:45:00",
-            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_3__components_MonthlyReadings_vue___default.a
+            currentlyActiveComponent: __WEBPACK_IMPORTED_MODULE_0__components_ThirtyMinuteReadings_vue___default.a
         };
     },
 
@@ -78418,18 +78416,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -78437,9 +78423,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             devices: [],
-            errors: [],
-            increaseDecrease: [],
-            increaseDecreaseMessage: ''
+            errors: []
         };
     },
 
@@ -78463,11 +78447,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             // Push devices into components array
                             _this.devices.push(response.data[j]);
                             // Push most recent and last reading of each device into component array
-                            _this.increaseDecrease.push({
-                                'first': response.data[j][d].attributes.reading,
-                                'last': response.data[j][response.data[j].length - 1].attributes.reading,
-                                'device': response.data[j][d].attributes.device_id
-                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -78556,32 +78535,6 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.increaseDecrease, function(incDec) {
-          return _c("div", { staticClass: "col-3 readings-chart" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(incDec.device) +
-                " -> " +
-                _vm._s(
-                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
-                ) +
-                "\n                \n                " +
-                _vm._s(
-                  incDec.last > incDec.prev
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n            "
-            )
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -78594,7 +78547,20 @@ var render = function() {
               attrs: {
                 data: [
                   {
-                    name: device[0].attributes.device_id,
+                    name:
+                      (device[0].attributes.device_id == "0004a30b0019bc1a"
+                        ? "Canterbury"
+                        : device[0].attributes.device_id) +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val.toFixed(2)
+                        : " ") +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val > 0
+                          ? "Up"
+                          : "Down"
+                        : " "),
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -78695,27 +78661,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'HourlyReadings',
     data: function data() {
         return {
             devices: [],
-            errors: [],
-            increaseDecrease: [],
-            increaseDecreaseMessage: ''
+            errors: []
         };
     },
 
@@ -78739,11 +78691,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             // Push devices into components array
                             _this.devices.push(response.data[j]);
                             // Push most recent and last reading of each device into component array
-                            _this.increaseDecrease.push({
-                                'prev': response.data[j][1].attributes.reading,
-                                'last': response.data[j][0].attributes.reading,
-                                'device': response.data[j][d].attributes.device_id
-                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -78830,32 +78777,6 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.increaseDecrease, function(incDec) {
-          return _c("div", { staticClass: "col-3 readings-chart" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(incDec.device) +
-                " -> " +
-                _vm._s(
-                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
-                ) +
-                "\n                \n                " +
-                _vm._s(
-                  incDec.last > incDec.prev
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n            "
-            )
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -78868,7 +78789,20 @@ var render = function() {
               attrs: {
                 data: [
                   {
-                    name: device[0].attributes.device_id,
+                    name:
+                      (device[0].attributes.device_id == "0004a30b0019bc1a"
+                        ? "Canterbury"
+                        : device[0].attributes.device_id) +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val.toFixed(2)
+                        : " ") +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val > 0
+                          ? "Up"
+                          : "Down"
+                        : " "),
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -78969,27 +78903,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'DailyReadings',
     data: function data() {
         return {
             devices: [],
-            errors: [],
-            increaseDecrease: [],
-            increaseDecreaseMessage: ''
+            errors: []
         };
     },
 
@@ -79013,11 +78933,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             // Push devices into components array
                             _this.devices.push(response.data[j]);
                             // Push most recent and last reading of each device into component array
-                            _this.increaseDecrease.push({
-                                'prev': response.data[j][1].attributes.reading,
-                                'last': response.data[j][0].attributes.reading,
-                                'device': response.data[j][d].attributes.device_id
-                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -79117,32 +79032,6 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.increaseDecrease, function(incDec) {
-          return _c("div", { staticClass: "col-3 readings-chart" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(incDec.device) +
-                " -> " +
-                _vm._s(
-                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
-                ) +
-                "\n                \n                " +
-                _vm._s(
-                  incDec.last > incDec.prev
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n            "
-            )
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -79155,7 +79044,20 @@ var render = function() {
               attrs: {
                 data: [
                   {
-                    name: device[0].attributes.device_id,
+                    name:
+                      (device[0].attributes.device_id == "0004a30b0019bc1a"
+                        ? "Canterbury"
+                        : device[0].attributes.device_id) +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val.toFixed(2)
+                        : " ") +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val > 0
+                          ? "Up"
+                          : "Down"
+                        : " "),
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -79258,8 +79160,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79267,9 +79167,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             devices: [],
-            errors: [],
-            increaseDecrease: [],
-            increaseDecreaseMessage: ''
+            errors: []
         };
     },
 
@@ -79279,11 +79177,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          * [fetchData description]
          * @return {[type]} [description]
          */
-        fetchData: function fetchData(callback) {
+        fetchData: function fetchData() {
             var _this = this;
 
             // Fetch all devices
             this.axios.get('api/device').then(function (response) {
+                // console.log(response);
                 // For each device returned
                 for (var d in response.data.data) {
 
@@ -79291,16 +79190,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     var deviceID = response.data.data[d].id;
 
                     _this.axios.get('api/device/' + deviceID + '/reading/monthly?type=\'1\'').then(function (response) {
+                        // console.log(response);
                         // Push each returned response (one for each device ID) into its own array
                         for (var j in response.data) {
                             // Push devices into components array
                             _this.devices.push(response.data[j]);
-                            // Push most recent and last reading of each device into component array
-                            _this.increaseDecrease.push({
-                                'prev': response.data[j][1].attributes.reading,
-                                'last': response.data[j][0].attributes.reading,
-                                'device': response.data[j][d].attributes.device_id
-                            });
                         }
                     }).catch(function (e) {
                         _this.errors.push(e);
@@ -79317,11 +79211,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          */
         calculateIncreaseDecreaseRange: function calculateIncreaseDecreaseRange() {
 
-            console.log(this.devices);
-            for (var i = 0; i < this.devices.length; i++) {
-                // console.log(data[i]);
-                this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
-            }
+            // console.log(data);
+            // for(var i = 0; i < this.devices.length; i++) {
+            //     // console.log(data[i]);
+            //     this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
+            // }
         },
 
         /**
@@ -79363,18 +79257,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      * @return {[type]} [description]
      */
     created: function created() {
-        this.fetchData(this.calculateIncreaseDecreaseRange);
+
+        this.fetchData();
         // Once parent has emitted the 'handle' event, call fetchDataWithSelectedDate()
         this.$parent.$on('handle', this.fetchDataWithSelectedDate);
-
-        var callback = function callback() {
-
-            console.log(this.devices);
-            for (var i = 0; i < this.devices.length; i++) {
-                // console.log(data[i]);
-                this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
-            }
-        };
     },
 
     /**
@@ -79383,6 +79269,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
      */
     mounted: function mounted() {
         console.log('MonthlyReadings Component mounted.');
+        this.calculateIncreaseDecreaseRange();
     }
 });
 
@@ -79424,37 +79311,11 @@ var render = function() {
       "div",
       { staticClass: "row" },
       _vm._l(_vm.devices, function(device) {
-        return _c(
-          "div",
-          { staticClass: "col-6 readings-chart" },
-          [
-            _vm._v(
-              "\n                " +
-                _vm._s(
-                  device[0].attributes.prev_difference_val > 0
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n\n                "
-            ),
-            _c("area-chart", {
-              attrs: {
-                data: [
-                  {
-                    name:
-                      device[0].attributes.prev_difference_val.toFixed(2) +
-                      " " +
-                      this.increaseDecreaseMessage,
-                    data: device.map(function(d) {
-                      return [d.attributes.time, d.attributes.reading]
-                    })
-                  }
-                ]
-              }
-            })
-          ],
-          1
-        )
+        return _c("div", { staticClass: "col-6 readings-chart" }, [
+          _vm._v(
+            "\" ? 'Canterbury' : device[0].attributes.device_id + ' ' + (device[0].attributes.prev_difference_val != null ? device[0].attributes.prev_difference_val.toFixed(2) : ' ') + ' ' + (device[0].attributes.prev_difference_val != null ? (device[0].attributes.prev_difference_val > 0 ? 'Up' : 'Down') : ' '), data: device.map(d => [d.attributes.time, d.attributes.reading])}]\">\n                "
+          )
+        ])
       })
     )
   ])
@@ -79546,26 +79407,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             devices: [],
-            errors: [],
-            increaseDecrease: [],
-            increaseDecreaseMessage: ''
+            errors: []
         };
     },
 
@@ -79589,11 +79436,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             // Push devices into components array
                             _this.devices.push(response.data[j]);
                             // Push most recent and last reading of each device into component array
-                            _this.increaseDecrease.push({
-                                'prev': response.data[j][1].attributes.reading,
-                                'last': response.data[j][0].attributes.reading,
-                                'device': response.data[j][d].attributes.device_id
-                            });
                         }
 
                         console.log(_this.increaseDecrease);
@@ -79682,32 +79524,6 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "panel-body" }, [
-      _c(
-        "div",
-        { staticClass: "row" },
-        _vm._l(_vm.increaseDecrease, function(incDec) {
-          return _c("div", { staticClass: "col-3 readings-chart" }, [
-            _vm._v(
-              "\n                " +
-                _vm._s(incDec.device) +
-                " -> " +
-                _vm._s(
-                  (this.increaseDecrease = Math.abs(incDec.last - incDec.prev))
-                ) +
-                "\n                \n                " +
-                _vm._s(
-                  incDec.last > incDec.prev
-                    ? (this.increaseDecreaseMessage = "Up")
-                    : (this.increaseDecreaseMessage = "Down")
-                ) +
-                "\n            "
-            )
-          ])
-        })
-      )
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       { staticClass: "row" },
@@ -79720,7 +79536,20 @@ var render = function() {
               attrs: {
                 data: [
                   {
-                    name: device[0].attributes.device_id,
+                    name:
+                      (device[0].attributes.device_id == "0004a30b0019bc1a"
+                        ? "Canterbury"
+                        : device[0].attributes.device_id) +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val.toFixed(2)
+                        : " ") +
+                      " " +
+                      (device[0].attributes.prev_difference_val != null
+                        ? device[0].attributes.prev_difference_val > 0
+                          ? "Up"
+                          : "Down"
+                        : " "),
                     data: device.map(function(d) {
                       return [d.attributes.time, d.attributes.reading]
                     })
@@ -79942,9 +79771,7 @@ var render = function() {
                       id: "example-datetime-local-input date-from"
                     },
                     on: { change: _vm.updateFromDate }
-                  }),
-                  _vm._v(" "),
-                  _c("p", [_vm._v("From: " + _vm._s(_vm.fromDate))])
+                  })
                 ]),
                 _vm._v(" "),
                 _vm._m(0)
@@ -80044,12 +79871,10 @@ var staticRenderFns = [
         staticClass: "form-control",
         attrs: {
           type: "datetime-local",
-          value: "2018-03-09T13:45:00",
+          value: "2018-03-16T13:45:00",
           id: "example-datetime-local-input date-to"
         }
-      }),
-      _vm._v(" "),
-      _c("p", [_vm._v("To: today")])
+      })
     ])
   }
 ]
