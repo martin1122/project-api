@@ -67,10 +67,6 @@
                   this.errors.push(e)
                 })
             },
-            calculateIncreaseDecreaseRange() {
-                
-                //
-            },
             fetchDataWithSelectedDate() {
 
                 var deviceID;

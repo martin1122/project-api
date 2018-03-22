@@ -69,18 +69,6 @@
                 })
             },
             /**
-             * [calculateIncreaseDecreaseRange description]
-             * @return {[type]} [description]
-             */
-            calculateIncreaseDecreaseRange() {
-                
-                // console.log(data);
-                // for(var i = 0; i < this.devices.length; i++) {
-                //     // console.log(data[i]);
-                //     this.devices[i].attributes.prev_difference_val > 0 ? this.increaseDecreaseMessage = 'Up' : this.increaseDecreaseMessage = 'Down';
-                // }
-            },
-            /**
              * [fetchDataWithSelectedDate description]
              * @return {[type]} [description]
              */
